@@ -1,10 +1,12 @@
 # ----------------------- #
 #      Main Configs       #
 # ----------------------- #
-
+markdown: kramdown
+mathjax: true
+logo: portrait.png
 url: hsiangyu.com
 title: Hsiangyu's Blog
-subtitle: 程式開發日常.
+subtitle: 程式開發日常
 author: Hsiangyu
 simple_search: https://www.google.com/search
 description:
