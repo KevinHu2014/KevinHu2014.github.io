@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Hsiangyu's Blog]]></title>
-  <link href="hsiangyu.com/atom.xml" rel="self"/>
-  <link href="hsiangyu.com/"/>
-  <updated>2017-01-08T00:57:17+08:00</updated>
-  <id>hsiangyu.com/</id>
+  <link href="/atom.xml" rel="self"/>
+  <link href="/"/>
+  <updated>2017-01-08T17:57:38+08:00</updated>
+  <id>/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
     
