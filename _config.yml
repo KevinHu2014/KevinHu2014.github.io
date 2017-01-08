@@ -3,12 +3,13 @@
 # ----------------------- #
 markdown: kramdown
 mathjax: true
-logo: portrait.png
-url: hsiangyu.com
+
+url: 
 title: Hsiangyu's Blog
 subtitle: 程式開發日常
 author: Hsiangyu
 simple_search: https://www.google.com/search
+logo: portrait.png
 description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
