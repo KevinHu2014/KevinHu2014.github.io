@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Hsiangyu's Blog]]></title>
-  <link href="http://hsiangyu.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: hackathon | Hsiangyu's Blog]]></title>
+  <link href="http://hsiangyu.com/blog/categories/hackathon/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
   <updated>2017-02-24T11:28:41+08:00</updated>
   <id>http://hsiangyu.com/</id>
