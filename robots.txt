@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: KevinHu2014.github.io/sitemap.xml 
+Sitemap: http://hsiangyu.com/sitemap.xml 
