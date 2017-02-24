@@ -3,7 +3,7 @@ layout: post
 title: "Nisra Hackathon 2017"
 date: 2017-02-23 11:44:02 +0800
 comments: true
-categories:
+categories: Hackathon
 ---
 # Nisra Hackathon 2017 心得
 
