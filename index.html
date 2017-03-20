@@ -115,7 +115,7 @@
 
   <div class="entry-content"><h2>前言</h2>
 
-<p>根據Simon Sinek的<strong>黃金圈</strong>理論，從裡到外分為三個階層，
+<p>根據Simon Sinek的<a href="http://tedxtaipei.com/articles/simon_sinek_how_great_leaders_inspire_action-2/"><strong>黃金圈</strong></a>理論，從裡到外分為三個階層，
 分別是why、how以及what；</p>
 
 <p>why代表領導者或品牌的理念和目標，</p>
@@ -154,9 +154,9 @@
 
 <p>當時我想 何不做一個占卜的Chatbot呢？</p>
 
-<p>但由於那時的我對易經一無所知，所以果斷放棄www</p>
+<p>但由於那時的我對易經一無所知，所以果斷放棄 (´_ゝ`)</p>
 
-<p>這學期剛好有修梅大的<strong><em>易經資訊學</em></strong>，沒想到第一堂課，老師就教了如何用易經占卜</p>
+<p>這學期剛好有修梅大的<a href="https://sls.weco.net/s17-IChing">易經資訊學</a>，沒想到第一堂課，老師就教了如何用易經占卜</p>
 
 <p>在興趣使然下，我開始了開發易經數字占卜Chatbot的旅程</p>
 
@@ -164,11 +164,11 @@
 
 <p>在去年FB Chatbot剛推出的時候，我剛好有走過tutorial，所以我直接有現成的bot可以改改</p>
 
-<p>Server的部分，我將Chatbot部署在Heroku上</p>
+<p>Server的部分，我將Chatbot部署在<a href="https://www.heroku.com/">Heroku</a>上</p>
 
 <p>易經資料的部分由於沒有找到現成的Api可以call，所以打算自己硬幹</p>
 
-<p>在網路上有查到<strong>易學網</strong>有現成的易經今解可以用，</p>
+<p>在網路上有查到<a href="http://www.eee-learning.com"><strong>易學網</strong></a>有現成的易經今解可以用，</p>
 
 <p><a href="http://www.eee-learning.com/book/neweee01">http://www.eee-learning.com/book/neweee01</a></p>
 
@@ -213,7 +213,9 @@
 
 <p>將易學網上共64卦的易經今解資料給爬下來，並輸出成txt，仔細看了這些爬下來的資料，</p>
 
-<p>發現並不是所有的經文都符合上述的規則，像是</p>
+<p>發現並不是所有的經文都符合上述的規則 (╯‵□′)╯︵┴─┴</p>
+
+<p>像是</p>
 
 <blockquote><p>元亨，利牝馬之貞。君子有攸往，先迷，後得主利。西南得朋，東北喪朋，安貞吉。初六，履霜，堅冰至。六二，直方大，不習无不利。六三，含章可貞，或從王事，无成有終。六四，括囊，无咎无譽。六五，黃裳，元吉。上六，龍戰于野，其血玄黃。用六，利永貞。</p></blockquote>
 
@@ -272,7 +274,56 @@
 
 <h1>後記</h1>
 
-<p>我晚點再補xDD</p>
+<h3>近期 ToDoList</h3>
+
+<ul>
+<li>加入使用正規表達式</li>
+<li>直接在Cards裡顯示爻辭與卦辭的解釋</li>
+<li>加入privacy policy</li>
+<li>招募測試人員</li>
+<li>提交應用程式進行審查</li>
+</ul>
+
+
+<p>目前在使用者輸入的部分還沒有做正規表達式的部分，
+此外在Cards裡顯示的資訊也不夠完整，我打算再寫爬蟲把
+易學網上的資料爬下來進行分析。</p>
+
+<p>在梅大的文中，Alan學長有提到privacy policy的部分，這點要特別注意，由於這個Chatbot有可能變向收集使用者的資料，所以加上privacy policy會比較保險。</p>
+
+<p>在正式上線前會先進行測試，有興趣成為測試者的歡迎mail我  ( <strong>kevinhu@weco.net</strong> )，你們的feedback非常重要!!</p>
+
+<h2>未來展望</h2>
+
+<ul>
+<li>解卦者的串接</li>
+<li>加入Payments的功能</li>
+</ul>
+
+
+<p>目前自己使用這個Chatbot發現有個問題，
+卜卦者可能會看不懂爻辭的解釋，</p>
+
+<p>會需要有經驗的解卦人來做進一步的解釋。
+像是我上次占卜要不要換駕訓班的教練，</p>
+
+<p>得到的結果是<strong><em>井卦 (水風井) 的九三</em></strong></p>
+
+<blockquote><p>九三，井渫不食，為我心惻。可用汲，王明，並受其福。</p>
+
+<p>《象》曰：井渫不食，行惻也；求王明，受福也。</p>
+
+<p>水井再次湧出甘甜的泉水，可以為人所飲用，然而因為之前水井壞掉，壞名聲在前，所以還不能讓人所接納。若有英明而有眼光的大王來取用，眾人也可以同享福報。</p>
+
+<p>井渫不食，為我心惻：井水清澈乾淨，卻沒人飲用，讓人感到傷心。比喻君子修德有成，但仍懷才不遇，道德不行。渫，音謝，除去污泥，說明井水已經乾淨清澈，可以飲用。心惻，傷心。惻，傷心的樣子。</p>
+
+<p>王明，並受其福：君王英明，有智慧，眾人將會因此而得到其福祉。有智慧的英明君王，當能選用人才，因此而福惠人民。</p></blockquote>
+
+<p>看完爻辭後，發現還是霧煞煞 ┐(´д`)┌</p>
+
+<p>因此未來如果有機會的話，會想去串接一些有經驗的解卦人，</p>
+
+<p>來為這個服務加值，同時導入<a href="https://developers.facebook.com/docs/messenger-platform/complete-guide/payments">Payments</a>的功能，讓這個Chatbot的更加完善。</p>
 </div>
   
   
