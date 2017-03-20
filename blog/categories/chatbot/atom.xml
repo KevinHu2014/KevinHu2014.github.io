@@ -4,7 +4,7 @@
   <title><![CDATA[Category: chatbot | Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/blog/categories/chatbot/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-03-20T19:09:44+08:00</updated>
+  <updated>2017-03-20T23:31:13+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -146,19 +146,9 @@
 
 <p>用六，利永貞。</p></blockquote>
 
-<p>但看似大部分的經文都符合此規則</p>
+<p>但看似大部分的經文都符合此規則，因此我使用了excel的資料剖析精靈，將txt的資料丟入後，以句號將資料分割成不同的欄位，然後把不合規則的欄位做手動調整，才得出乾淨的資料。</p>
 
-<p>因此我使用了excel的資料剖析精靈</p>
-
-<p>將txt的資料丟入後，以句號將資料分割成不同的欄位，</p>
-
-<p>然後把不合規則的欄位做手動調整，才得出乾淨的資料。</p>
-
-<p>由於這些資料都是只是顯示而已，沒有必要用到資料庫，</p>
-
-<p>本來想說直接用js去讀csv，但查了資料感覺好麻煩，</p>
-
-<p>還是用json格式最方便，在網路上找了excel to json
+<p>由於這些資料都是只是顯示而已，沒有必要用到資料庫，本來想說直接用js去讀csv，但查了資料感覺好麻煩，還是用json格式最方便，在網路上找了excel to json
 的線上工具做了轉換。</p>
 
 <p>最後在js的程式中去讀json的資料。</p>
@@ -173,7 +163,7 @@
 
 <p>點擊 查看爻辭 會跳轉到 <a href="http://www.eee-learning.com/book/neweee33">http://www.eee-learning.com/book/neweee33</a></p>
 
-<p><img src="https://s19.postimg.org/4wooklx43/2017_03_20_2_40_33.png" alt="alt tag" /></p>
+<p><img src="https://s19.postimg.org/7bl5is2qr/2017_03_20_11_27_43.png" alt="alt tag" /></p>
 
 <p>點擊 查看卦辭 會跳轉到 <a href="http://www.eee-learning.com/simple64/33">http://www.eee-learning.com/simple64/33</a></p>
 
