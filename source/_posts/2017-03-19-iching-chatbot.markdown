@@ -128,19 +128,9 @@ http://www.eee-learning.com/book/neweee01
 
 >用六，利永貞。
 
-但看似大部分的經文都符合此規則
+但看似大部分的經文都符合此規則，因此我使用了excel的資料剖析精靈，將txt的資料丟入後，以句號將資料分割成不同的欄位，然後把不合規則的欄位做手動調整，才得出乾淨的資料。
 
-因此我使用了excel的資料剖析精靈
-
-將txt的資料丟入後，以句號將資料分割成不同的欄位，
-
-然後把不合規則的欄位做手動調整，才得出乾淨的資料。
-
-由於這些資料都是只是顯示而已，沒有必要用到資料庫，
-
-本來想說直接用js去讀csv，但查了資料感覺好麻煩，
-
-還是用json格式最方便，在網路上找了excel to json
+由於這些資料都是只是顯示而已，沒有必要用到資料庫，本來想說直接用js去讀csv，但查了資料感覺好麻煩，還是用json格式最方便，在網路上找了excel to json
 的線上工具做了轉換。
 
 最後在js的程式中去讀json的資料。
@@ -157,7 +147,7 @@ http://www.eee-learning.com/book/neweee01
 點擊 查看爻辭 會跳轉到 http://www.eee-learning.com/book/neweee33
 
 
-![alt tag](https://s19.postimg.org/4wooklx43/2017_03_20_2_40_33.png)
+![alt tag](https://s19.postimg.org/7bl5is2qr/2017_03_20_11_27_43.png)
 
 點擊 查看卦辭 會跳轉到 http://www.eee-learning.com/simple64/33
 
