@@ -142,7 +142,7 @@ http://www.eee-learning.com/book/neweee01
 
 ![alt tag](https://s19.postimg.org/b402krsv7/2017_03_20_2_13_51.png)
 
-![alt tag](https://s19.postimg.org/4incl0d0j/2017_03_20_2_40_13.png)
+![alt tag](https://s19.postimg.org/4wooklx43/螢幕快照_2017_03_20_上午2_40_33.png)
 
 點擊 查看爻辭 會跳轉到 http://www.eee-learning.com/book/neweee33
 
