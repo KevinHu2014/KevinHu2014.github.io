@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hackathon | Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/blog/categories/hackathon/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-03-26T12:07:16+08:00</updated>
+  <updated>2017-03-26T21:44:16+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -53,7 +53,7 @@
 A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時間內Geocoding那麼多點其實是有困難的，我手邊還留著當時Geocoding好的一些資料，所以就直接提供給坑主做使用。
 坑主將我提供的csv資料匯入Google的fusion table 工具來製作熱點圖。</p>
 
-<p>下午我參與了另一個<strong>itaigi 愛台語</strong>的專案，這個專案主要功能是輸入華語能查台語的發音。我在玩愛台語的網站時剛好發現有些此的台語發音在Chrome上也無法使用，後來丞宏發現是因為server掛掉，當時想說若要偵測server是不是活的，可以做一個<strong><em>發音有問題</em></strong> 的回報按鈕，並且紀錄瀏覽器與時間。我的跳坑之旅也就這樣開始了，
+<p>下午我參與了另一個<strong>itaigi 愛台語</strong>的專案，這個專案主要功能是輸入華語能查台語的發音。我在玩愛台語的網站時剛好發現有些此的台語發音在Chrome上也無法使用，後來丞宏發現是因為server掛掉，當時想說若要偵測server是不是活的，可以做一個<strong><em>發音有問題</em></strong> 的回報按鈕，並且紀錄瀏覽器與時間。我的跳坑之旅也就這樣開始了&hellip;
 <code>javascript
 //抓取使用者的瀏覽器版本和作業系統
 let appVersion = navigator.appVersion;
@@ -66,7 +66,7 @@ console.log('沒有發音\n' + '時間：' + n + '\n' + 'appVersion: ' + appVers
 
 <h2>心得</h2>
 
-<p>之後在補xDD</p>
+<p>這次的黑客松體驗非常好，比起以往比賽式的黑客松，在有限時間完成一個小型prototype來說，輕鬆許多，與人的交流才是重點，你可以同時參與多個不同性質的專案，而這也是我第一次體驗深刻體會到開源貢獻的重要性，感覺朝夢想更進了一步，（我的夢想是用科技的力量讓生活變得更方便），對我這個興趣使然的工程師來說，參與這種活動可以說是一大享受，未來我一定會持續參與這類的活動。</p>
 ]]></content>
   </entry>
   
