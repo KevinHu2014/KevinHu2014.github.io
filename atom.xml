@@ -4,7 +4,7 @@
   <title><![CDATA[Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-05-18T01:49:15+08:00</updated>
+  <updated>2017-09-12T15:58:46+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -12,6 +12,288 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PermissionsAndroid 坑]]></title>
+    <link href="http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/"/>
+    <updated>2017-09-04T17:50:59+08:00</updated>
+    <id>http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid</id>
+    <content type="html"><![CDATA[<h1>Andoird 6.0 PermissionsAndroid 坑</h1>
+
+<h2>前言</h2>
+
+<p>最近開發公司的RN專案遇到一個問題，明明在 <code>AndroidManifest.xml</code>有加入了
+<code>
+  &lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
+</code>
+，但在執行的時候還是會噴error，接著就直接crash。
+<a href="https://postimg.org/image/9cbhtb0yd/"><img src="https://s26.postimg.org/tjoxllyft/21706759_1435564026520969_1452689658_o.png" alt="error-message" /></a></p>
+
+<p>到應用程式的設定去看，會發現<strong>位置</strong>的授權並沒有被開啟，可是我記得在<code>Andoird 5.0</code>之前是沒有這個問題的，最近把開發機升級到<code>Andoird 7.0</code>才遇到。</p>
+
+<h2>正文</h2>
+
+<p>深入研究後，才發現在<code>Andoird 6.0 (API 23)</code> 之後，危險權限都需要動態取得使用者授權。貼心的是React Native 有提供 <code>PermissionsAndroid</code> 的 API 來供你使用👏👏</p>
+
+<p>那 <code>PermissionsAndroid</code> 有提供三個 Methods:</p>
+
+<h3>check (permission)</h3>
+
+<p>檢查權限</p>
+
+<blockquote><p>Returns a promise resolving to a boolean value as to whether the specified permissions has been granted</p></blockquote>
+
+<p>範例：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//檢查 Loaction Permission 為例</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">async</span> <span class="nx">checkLocationPermission</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span>
+</span><span class='line'>        <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">ACCESS_FINE_LOCATION</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;客官已授予位置的權限&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;客官尚未授予位置權限&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>request(permission, rationale?)</h3>
+
+<p>請求權限</p>
+
+<blockquote><p>Prompts the user to enable a permission and returns a promise resolving to a string value indicating whether the user allowed or denied the request</p>
+
+<p>If the optional rationale argument is included (which is an object with a title and message), this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (<a href="https://developer.android.com/training/permissions/requesting.html#explain">https://developer.android.com/training/permissions/requesting.html#explain</a>) and then shows the system permission dialog</p></blockquote>
+
+<p>rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會顯示預設的訊息。</p>
+
+<p>範例：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//請求 Camera Permission 為例</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">async</span> <span class="nx">requestCameraPermission</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span>
+</span><span class='line'>      <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">CAMERA</span><span class="p">,</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Cool Photo App Camera Permission&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;message&#39;</span><span class="o">:</span> <span class="s1">&#39;Cool Photo App needs access to your camera &#39;</span> <span class="o">+</span>
+</span><span class='line'>                   <span class="s1">&#39;so you can take awesome pictures.&#39;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;You can use the camera&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Camera permission denied&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>requestMultiple(permissions)</h3>
+
+<p>請求多個權限</p>
+
+<blockquote><p>Prompts the user to enable multiple permissions in the same dialog and returns an object with the permissions as keys and strings as values indicating whether the user allowed or denied the request</p></blockquote>
+
+<h3>使用流程</h3>
+
+<p>我的使用流程會先去check 使用者是否已授權此權限，如果沒有的話則向使用者發出請求。</p>
+
+<p>範例：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">checkLocationPermission</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 檢查使用者的位置授權</span>
+</span><span class='line'><span class="nx">async</span> <span class="nx">checkLocationPermission</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span>
+</span><span class='line'>      <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">ACCESS_FINE_LOCATION</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span> <span class="o">||</span> <span class="nx">granted</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// 有拿到授權才去要 GPS</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">askForGPS</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// 沒有授權的話就去向使用者請求</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">requestLocationPermission</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">async</span> <span class="nx">askForGPS</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//如果使用者沒有開啟GPS的話，要去跟他要</span>
+</span><span class='line'>  <span class="nx">LocationServicesDialogBox</span><span class="p">.</span><span class="nx">checkLocationServicesIsEnabled</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;&lt;h2&gt;Use Location ?&lt;/h2&gt;This app wants to change your device settings:&lt;br/&gt;&lt;br/&gt;Use GPS, Wi-Fi, and cell network for location&lt;br/&gt;&lt;br/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">ok</span><span class="o">:</span> <span class="s1">&#39;YES&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">cancel</span><span class="o">:</span> <span class="s1">&#39;NO&#39;</span>
+</span><span class='line'>  <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">success</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//如果使用者有開啟gps才去抓他的位置</span>
+</span><span class='line'>      <span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span>
+</span><span class='line'>        <span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">latitude</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">longitude</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> <span class="p">},</span>
+</span><span class='line'>        <span class="p">{</span> <span class="nx">enableHighAccuracy</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">timeout</span><span class="o">:</span> <span class="mi">20000</span><span class="p">,</span> <span class="nx">maximumAge</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">},</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span> <span class="c1">// success =&gt; &quot;enabled&quot;</span>
+</span><span class='line'>  <span class="p">}).</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">alertVisible</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// error.message =&gt; &quot;disabled&quot;</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">async</span> <span class="nx">requestLocationPermission</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span>
+</span><span class='line'>      <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">ACCESS_FINE_LOCATION</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span>  <span class="o">||</span> <span class="nx">granted</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;現在你獲得GPS權限了&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">askForGPS</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;用戶不理你&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這邊補充說明一下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span>  <span class="o">||</span> <span class="nx">granted</span> <span class="o">===</span> <span class="kc">true</span><span class="p">){}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這邊要另外寫<code>granted === true</code> 是因為SDK 小於23 的話是回傳 true</p>
+
+<blockquote><p>On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so check and request should always be true.</p></blockquote>
+
+<h3>叮嚀</h3>
+
+<p>在測試這塊的時候要記得，除了測 SDK >= 23的版本之外， SDK &lt; 23 的也要記得測試。</p>
+
+<h2>參考資料</h2>
+
+<p><a href="https://facebook.github.io/react-native/docs/permissionsandroid.html">https://facebook.github.io/react-native/docs/permissionsandroid.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Facebook Developer Circle Taipei]]></title>

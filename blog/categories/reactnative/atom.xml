@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: reactnative | Hsiangyu's Blog]]></title>
+  <link href="http://hsiangyu.com/blog/categories/reactnative/atom.xml" rel="self"/>
+  <link href="http://hsiangyu.com/"/>
+  <updated>2017-09-12T16:00:07+08:00</updated>
+  <id>http://hsiangyu.com/</id>
+  <author>
+    <name><![CDATA[Hsiangyu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PermissionsAndroid 坑]]></title>
+    <link href="http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/"/>
+    <updated>2017-09-04T17:50:59+08:00</updated>
+    <id>http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid</id>
+    <content type="html"><![CDATA[<h1>Andoird 6.0 PermissionsAndroid 坑</h1>
+
+<h2>前言</h2>
+
+<p>最近開發公司的RN專案遇到一個問題，明明在 <code>AndroidManifest.xml</code>有加入了
+<code>
+  &lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
+</code>
+，但在執行的時候還是會噴error，接著就直接crash。
+<a href="https://postimg.org/image/9cbhtb0yd/"><img src="https://s26.postimg.org/tjoxllyft/21706759_1435564026520969_1452689658_o.png" alt="error-message" /></a></p>
+
+<p>到應用程式的設定去看，會發現<strong>位置</strong>的授權並沒有被開啟，可是我記得在<code>Andoird 5.0</code>之前是沒有這個問題的，最近把開發機升級到<code>Andoird 7.0</code>才遇到。</p>
+
+<h2>正文</h2>
+
+<p>深入研究後，才發現在<code>Andoird 6.0 (API 23)</code> 之後，危險權限都需要動態取得使用者授權。貼心的是React Native 有提供 <code>PermissionsAndroid</code> 的 API 來供你使用👏👏</p>
+
+<p>那 <code>PermissionsAndroid</code> 有提供三個 Methods:</p>
+
+<h3>check (permission)</h3>
+
+<p>檢查權限</p>
+
+<blockquote><p>Returns a promise resolving to a boolean value as to whether the specified permissions has been granted</p></blockquote>
+
+<p>範例：
+```javascript
+//檢查 Loaction Permission 為例</p>
+
+<p>async checkLocationPermission() {
+    try {
+      const granted = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log(&lsquo;客官已授予位置的權限&rsquo;);
+      } else {
+        console.log(&lsquo;客官尚未授予位置權限&rsquo;)
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  }</p>
+
+<pre><code>### request(permission, rationale?)
+請求權限
+&gt;Prompts the user to enable a permission and returns a promise resolving to a string value indicating whether the user allowed or denied the request
+
+&gt;If the optional rationale argument is included (which is an object with a title and message), this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (https://developer.android.com/training/permissions/requesting.html#explain) and then shows the system permission dialog
+
+rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會顯示預設的訊息。
+
+範例：
+</code></pre>
+
+<p>//請求 Camera Permission 為例</p>
+
+<p>async requestCameraPermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        &lsquo;title&rsquo;: &lsquo;Cool Photo App Camera Permission&rsquo;,
+        &lsquo;message&rsquo;: &lsquo;Cool Photo App needs access to your camera &rsquo; +
+                   &lsquo;so you can take awesome pictures.&rsquo;
+      }
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log(&ldquo;You can use the camera&rdquo;)
+    } else {
+      console.log(&ldquo;Camera permission denied&rdquo;)
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+}
+```</p>
+
+<h3>requestMultiple(permissions)</h3>
+
+<p>請求多個權限</p>
+
+<blockquote><p>Prompts the user to enable multiple permissions in the same dialog and returns an object with the permissions as keys and strings as values indicating whether the user allowed or denied the request</p></blockquote>
+
+<h3>使用流程</h3>
+
+<p>我的使用流程會先去check 使用者是否已授權此權限，如果沒有的話則向使用者發出請求。</p>
+
+<p>範例：
+```javascript</p>
+
+<p>componentWillMount() {
+  this.checkLocationPermission();
+}</p>
+
+<p>// 檢查使用者的位置授權
+async checkLocationPermission() {
+  try {
+    const granted = await PermissionsAndroid.check(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED || granted === true) {
+      // 有拿到授權才去要 GPS
+      this.askForGPS();
+    } else {
+      // 沒有授權的話就去向使用者請求
+      this.requestLocationPermission();
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}</p>
+
+<p>async askForGPS() {
+  //如果使用者沒有開啟GPS的話，要去跟他要
+  LocationServicesDialogBox.checkLocationServicesIsEnabled({
+      message: &lsquo;<h2>Use Location ?</h2>This app wants to change your device settings:<br/><br/>Use GPS, Wi-Fi, and cell network for location<br/><br/>&rsquo;,
+      ok: &lsquo;YES&rsquo;,
+      cancel: &lsquo;NO&rsquo;
+  }).then((success) => {
+      //如果使用者有開啟gps才去抓他的位置
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position.coords.latitude);
+          console.log(position.coords.longitude);
+        },
+        (error) => { console.log(error); },
+        { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+      );
+      console.log(success); // success => &ldquo;enabled&rdquo;
+  }).catch((error) => {
+      this.setState({ alertVisible: true });
+      console.log(error.message); // error.message => &ldquo;disabled&rdquo;
+  });
+}</p>
+
+<p>async requestLocationPermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED  || granted === true) {
+      console.log(&lsquo;現在你獲得GPS權限了&rsquo;);
+      this.askForGPS();
+    } else {
+      console.log(&lsquo;用戶不理你&rsquo;);
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+```</p>
+
+<p>這邊補充說明一下
+<code>javascript
+  if (granted === PermissionsAndroid.RESULTS.GRANTED  || granted === true){}
+</code>
+這邊要另外寫<code>granted === true</code> 是因為SDK 小於23 的話是回傳 true</p>
+
+<blockquote><p>On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so check and request should always be true.</p></blockquote>
+
+<h3>叮嚀</h3>
+
+<p>在測試這塊的時候要記得，除了測 SDK >= 23的版本之外， SDK &lt; 23 的也要記得測試。</p>
+
+<h2>參考資料</h2>
+
+<p><a href="https://facebook.github.io/react-native/docs/permissionsandroid.html">https://facebook.github.io/react-native/docs/permissionsandroid.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>
