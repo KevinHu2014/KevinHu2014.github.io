@@ -30,7 +30,9 @@ categories: ReactNative
 >Returns a promise resolving to a boolean value as to whether the specified permissions has been granted
 
 範例：
+
 ```javascript
+
 //檢查 Loaction Permission 為例
 
 async checkLocationPermission() {
@@ -49,6 +51,7 @@ async checkLocationPermission() {
   }
 
 ```
+
 ### request(permission, rationale?)
 請求權限
 >Prompts the user to enable a permission and returns a promise resolving to a string value indicating whether the user allowed or denied the request
@@ -58,6 +61,7 @@ async checkLocationPermission() {
 rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會顯示預設的訊息。
 
 範例：
+
 ```javascript
 //請求 Camera Permission 為例
 
@@ -80,6 +84,7 @@ async requestCameraPermission() {
     console.warn(err)
   }
 }
+
 ```
 
 ### requestMultiple(permissions)
@@ -90,6 +95,7 @@ async requestCameraPermission() {
 我的使用流程會先去check 使用者是否已授權此權限，如果沒有的話則向使用者發出請求。
 
 範例：
+
 ```javascript
 
 componentWillMount() {
@@ -153,12 +159,17 @@ async requestLocationPermission() {
     console.warn(err);
   }
 }
+
 ```
 
 這邊補充說明一下
+
 ```javascript
+
   if (granted === PermissionsAndroid.RESULTS.GRANTED  || granted === true){}
+
 ```
+
 這邊要另外寫`granted === true` 是因為SDK 小於23 的話是回傳 true
 
 > On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so check and request should always be true.
