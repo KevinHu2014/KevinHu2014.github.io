@@ -1,0 +1,138 @@
+---
+layout: post
+title: "git-flow"
+date: 2017-09-26 14:40:20 +0800
+comments: true
+categories: Git
+---
+# Git flow 筆記
+
+## 前言
+在公司開發專案的時候，同事剛好需要開發一個新的feature，而這個feature需要必較久的時間才能回到master，此時我們重新檢視了原來使用的開發流Github Flow 是不是有什麼缺點，並且也討論到如果轉到Git flow是否能解決現況下遇到的問題。
+
+## 簡介
+Flow 翻成中文是 『水流』的意思，這裡我們可以理解成工作流程，就像水流似的順暢流動。
+
+廣泛被使用的工作流有三種：
++ Git flow
++ Github flow
++ Gitlab flow
+
+而本文主要把重點放在Git flow。
+
+Git 雖然方便好用，但並沒有提出一套管理分支的方法，而國外有大大整理出一套方法: [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)，而這套方法就是大家熟知的Git flow。
+
+
+Git flow 的主要概念就是他有兩個主要的branch
+![](http://nvie.com/img/main-branches@2x.png)
+
+分別為master 和 develop
+
+develop是負責開發的分支，而master是給production用的
+
+而次要分支有feature, release 跟hotfix
+
+![](http://nvie.com/img/git-model@2x.png)
+第一次看到這張圖可能會被嚇到吧www ，但這張圖其實沒有想像中的複雜，只比前一張圖多了三個次要分支。
+
+接下來就一一來介紹他們～
+
+首先是feature 分支，使用時機是只要是開發新功能的時候，
+就開新的feature 分支，而當此feature 分支開發完後，
+就將它 merge 回 develop 分支。
+
+
+再來是release 分支，使用時機是在送出下一版前要修正bug的時候，
+此時就開新的release 分支，而當此release 分支開發完後，讓他同時回到develop 還有 master 分支。
+
+而至於hotfix 分支使用的時機則是在修已上production 後臨時要修bug時，當hotfix 分支開發完後，讓他同時回到develop 還有 master 分支。
+
+
+
+
+## 教學
+
+由於Git flow 不是Git 裡原有的功能，所以我們需要另外安裝作者所提供的[gitflow](https://github.com/nvie/gitflow) 工具。
+
+而這裡就以Mac OS X來做教學，並假設你有裝[homebrew](https://brew.sh/index_zh-tw.html)。
+
+###  安裝
+    $ brew install git-flow
+
+### 為專案加入Git flow
+
+    $ git flow init
+
+### 建立分支
+#### feature
+
+列出所有的feature branch
+
+    $ git flow feature  
+
+開啟新的 feature branch
+
+    $ git flow feature start <name>
+
+* name 為你想要的feature 分支名稱
+
+結束feature branch
+
+    $ git flow feature finish <name>
+
+* name 為你想要結束的分支名稱
+* feature 分支完成後會被 merge進 develop 分支
+
+把feature 分支 推到 remote
+
+    $ git flow feature publish <name>
+* name 為你想要推的分支名稱
+
+把remote的 feature 分支拉下來
+
+    $ git flow feature pull <remote> <name>
+* remote 通常是 origin 的樣子? <-  這裡可能還要請大大糾正
+* name 為你要拉的分支名稱
+
+#### release
+
+列出所有的 release branch
+
+    $ git flow release  
+
+開啟新的 release branch
+
+    $ git flow release start <release>
+
+* release 為你想要的 release 分支名稱
+
+結束 release branch
+
+    $ git flow release finish <release>
+
+* release 為你想要結束的分支名稱
+* release 分支完成後會被 merge進 develop 分支 和 master 分支
+
+
+#### hotfix
+
+列出所有的 hotfix branch
+
+    $ git flow hotfix  
+
+開啟新的 hotfix branch
+
+    $ git flow hotfix start <release>
+
+* release 為你想要的 hotfix 分支名稱
+
+結束 hotfix branch
+
+    $ git flow hotfix finish <release>
+
+* hotfix 為你想要結束的分支名稱
+* release 分支完成後會被 merge進 develop 分支 和 master 分支
+
+## 結論
+
+介紹了那麼多，最後的結論是我們沒有使用Git flow 😂 😂 😂，由於公司專案deploy的很頻繁，基本上master 和 develop 分支是沒有差別的，再者就算使用Git flow 也無法解決 feature 分支很久才回production 的問題，因此還是繼續使用原本的Github flow來當作我們的 workflow，不過剛好趁這個機會我也對Git flow 有進一步的認識。
