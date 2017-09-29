@@ -9,7 +9,7 @@
   <meta name="author" content="Hsiangyu">
 
   
-  <meta name="description" content="Andoird 6.0 PermissionsAndroid 坑 前言 最近開發公司的RN專案遇到一個問題，明明在 AndroidManifest.xml有加入了 &lt;uses-permission android:name="android.permission. &hellip;">
+  <meta name="description" content="Git flow 筆記 前言 在公司開發專案的時候，同事剛好需要開發一個新的feature，而這個feature需要必較久的時間才能回到master，此時我們重新檢視了原來使用的開發流Github Flow 是不是有什麼缺點，並且也討論到如果轉到Git flow是否能解決現況下遇到的問題。 簡介 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +101,211 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2017/09/26/git-flow/">Git-flow</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-09-26T14:40:20+08:00" pubdate data-updated="true"></time>
+        
+         | <a href="/blog/2017/09/26/git-flow/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Git flow 筆記</h1>
+
+<h2>前言</h2>
+
+<p>在公司開發專案的時候，同事剛好需要開發一個新的feature，而這個feature需要必較久的時間才能回到master，此時我們重新檢視了原來使用的開發流Github Flow 是不是有什麼缺點，並且也討論到如果轉到Git flow是否能解決現況下遇到的問題。</p>
+
+<h2>簡介</h2>
+
+<p>Flow 翻成中文是 『水流』的意思，這裡我們可以理解成工作流程，就像水流似的順暢流動。</p>
+
+<p>廣泛被使用的工作流有三種：
++ Git flow
++ Github flow
++ Gitlab flow</p>
+
+<p>而本文主要把重點放在Git flow。</p>
+
+<p>Git 雖然方便好用，但並沒有提出一套管理分支的方法，而國外有大大整理出一套方法: <a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a>，而這套方法就是大家熟知的Git flow。</p>
+
+<p>Git flow 的主要概念就是他有兩個主要的branch
+<img src="http://nvie.com/img/main-branches@2x.png" alt="" /></p>
+
+<p>分別為master 和 develop</p>
+
+<p>develop是負責開發的分支，而master是給production用的</p>
+
+<p>而次要分支有feature, release 跟hotfix</p>
+
+<p><img src="http://nvie.com/img/git-model@2x.png" alt="" />
+第一次看到這張圖可能會被嚇到吧www ，但這張圖其實沒有想像中的複雜，只比前一張圖多了三個次要分支。</p>
+
+<p>接下來就一一來介紹他們～</p>
+
+<p>首先是feature 分支，使用時機是只要是開發新功能的時候，
+就開新的feature 分支，而當此feature 分支開發完後，
+就將它 merge 回 develop 分支。</p>
+
+<p>再來是release 分支，使用時機是在送出下一版前要修正bug的時候，
+此時就開新的release 分支，而當此release 分支開發完後，讓他同時回到develop 還有 master 分支。</p>
+
+<p>而至於hotfix 分支使用的時機則是在修已上production 後臨時要修bug時，當hotfix 分支開發完後，讓他同時回到develop 還有 master 分支。</p>
+
+<h2>教學</h2>
+
+<p>由於Git flow 不是Git 裡原有的功能，所以我們需要另外安裝作者所提供的<a href="https://github.com/nvie/gitflow">gitflow</a> 工具。</p>
+
+<p>而這裡就以Mac OS X來做教學，並假設你有裝<a href="https://brew.sh/index_zh-tw.html">homebrew</a>。</p>
+
+<h3>安裝</h3>
+
+<pre><code>$ brew install git-flow
+</code></pre>
+
+<h3>為專案加入Git flow</h3>
+
+<pre><code>$ git flow init
+</code></pre>
+
+<h3>建立分支</h3>
+
+<h4>feature</h4>
+
+<p>列出所有的feature branch</p>
+
+<pre><code>$ git flow feature  
+</code></pre>
+
+<p>開啟新的 feature branch</p>
+
+<pre><code>$ git flow feature start &lt;name&gt;
+</code></pre>
+
+<ul>
+<li>name 為你想要的feature 分支名稱</li>
+</ul>
+
+
+<p>結束feature branch</p>
+
+<pre><code>$ git flow feature finish &lt;name&gt;
+</code></pre>
+
+<ul>
+<li>name 為你想要結束的分支名稱</li>
+<li>feature 分支完成後會被 merge進 develop 分支</li>
+</ul>
+
+
+<p>把feature 分支 推到 remote</p>
+
+<pre><code>$ git flow feature publish &lt;name&gt;
+</code></pre>
+
+<ul>
+<li>name 為你想要推的分支名稱</li>
+</ul>
+
+
+<p>把remote的 feature 分支拉下來</p>
+
+<pre><code>$ git flow feature pull &lt;remote&gt; &lt;name&gt;
+</code></pre>
+
+<ul>
+<li>remote 通常是 origin 的樣子? &lt;-  這裡可能還要請大大糾正</li>
+<li>name 為你要拉的分支名稱</li>
+</ul>
+
+
+<h4>release</h4>
+
+<p>列出所有的 release branch</p>
+
+<pre><code>$ git flow release  
+</code></pre>
+
+<p>開啟新的 release branch</p>
+
+<pre><code>$ git flow release start &lt;release&gt;
+</code></pre>
+
+<ul>
+<li>release 為你想要的 release 分支名稱</li>
+</ul>
+
+
+<p>結束 release branch</p>
+
+<pre><code>$ git flow release finish &lt;release&gt;
+</code></pre>
+
+<ul>
+<li>release 為你想要結束的分支名稱</li>
+<li>release 分支完成後會被 merge進 develop 分支 和 master 分支</li>
+</ul>
+
+
+<h4>hotfix</h4>
+
+<p>列出所有的 hotfix branch</p>
+
+<pre><code>$ git flow hotfix  
+</code></pre>
+
+<p>開啟新的 hotfix branch</p>
+
+<pre><code>$ git flow hotfix start &lt;release&gt;
+</code></pre>
+
+<ul>
+<li>release 為你想要的 hotfix 分支名稱</li>
+</ul>
+
+
+<p>結束 hotfix branch</p>
+
+<pre><code>$ git flow hotfix finish &lt;release&gt;
+</code></pre>
+
+<ul>
+<li>hotfix 為你想要結束的分支名稱</li>
+<li>release 分支完成後會被 merge進 develop 分支 和 master 分支</li>
+</ul>
+
+
+<h2>結論</h2>
+
+<p>介紹了那麼多，最後的結論是我們沒有使用Git flow 😂 😂 😂，由於公司專案deploy的很頻繁，基本上master 和 develop 分支是沒有差別的，再者就算使用Git flow 也無法解決 feature 分支很久才回production 的問題，因此還是繼續使用原本的Github flow來當作我們的 workflow，不過剛好趁這個機會我也對Git flow 有進一步的認識。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2017/09/04/react-native-permissionsandroid/">PermissionsAndroid 坑</a></h1>
     
     
@@ -118,6 +323,8 @@
 
 
 <time datetime="2017-09-04T17:50:59+08:00" pubdate data-updated="true"></time>
+        
+         | <a href="/blog/2017/09/04/react-native-permissionsandroid/#disqus_thread">Comments</a>
         
       </p>
     
@@ -428,6 +635,8 @@
 
 <time datetime="2017-05-17T23:50:47+08:00" pubdate data-updated="true"></time>
         
+         | <a href="/blog/2017/05/17/facebook-developer-circle/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -557,6 +766,8 @@
 
 <time datetime="2017-03-25T22:56:08+08:00" pubdate data-updated="true"></time>
         
+         | <a href="/blog/2017/03/25/moed19ct/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -648,6 +859,8 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 
 
 <time datetime="2017-03-19T23:53:54+08:00" pubdate data-updated="true"></time>
+        
+         | <a href="/blog/2017/03/19/iching-chatbot/#disqus_thread">Comments</a>
         
       </p>
     
@@ -885,6 +1098,8 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 
 <time datetime="2017-02-23T11:44:02+08:00" pubdate data-updated="true"></time>
         
+         | <a href="/blog/2017/02/23/nisra-hackathon-2017/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -1013,6 +1228,10 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/09/26/git-flow/">git-flow</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/09/04/react-native-permissionsandroid/">PermissionsAndroid 坑</a>
       </li>
     
@@ -1026,10 +1245,6 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
     
       <li class="post">
         <a href="/blog/2017/03/19/iching-chatbot/">易經數字占卜Chatbot</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/23/nisra-hackathon-2017/">Nisra Hackathon 2017</a>
       </li>
     
   </ul>

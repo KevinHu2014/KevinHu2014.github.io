@@ -4,7 +4,7 @@
   <title><![CDATA[Category: reactnative | Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/blog/categories/reactnative/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-09-12T16:00:07+08:00</updated>
+  <updated>2017-09-29T15:57:11+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -43,58 +43,61 @@
 
 <blockquote><p>Returns a promise resolving to a boolean value as to whether the specified permissions has been granted</p></blockquote>
 
-<p>範例：
-```javascript
-//檢查 Loaction Permission 為例</p>
+<p>範例：</p>
 
-<p>async checkLocationPermission() {
+<pre><code class="javascript">
+//檢查 Loaction Permission 為例
+
+async checkLocationPermission() {
     try {
       const granted = await PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log(&lsquo;客官已授予位置的權限&rsquo;);
+        console.log('客官已授予位置的權限');
       } else {
-        console.log(&lsquo;客官尚未授予位置權限&rsquo;)
+        console.log('客官尚未授予位置權限')
       }
     } catch (err) {
       console.warn(err);
     }
-  }</p>
-
-<pre><code>### request(permission, rationale?)
-請求權限
-&gt;Prompts the user to enable a permission and returns a promise resolving to a string value indicating whether the user allowed or denied the request
-
-&gt;If the optional rationale argument is included (which is an object with a title and message), this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (https://developer.android.com/training/permissions/requesting.html#explain) and then shows the system permission dialog
-
-rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會顯示預設的訊息。
-
-範例：
+  }
 </code></pre>
 
-<p>//請求 Camera Permission 為例</p>
+<h3>request(permission, rationale?)</h3>
 
-<p>async requestCameraPermission() {
+<p>請求權限</p>
+
+<blockquote><p>Prompts the user to enable a permission and returns a promise resolving to a string value indicating whether the user allowed or denied the request</p>
+
+<p>If the optional rationale argument is included (which is an object with a title and message), this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (<a href="https://developer.android.com/training/permissions/requesting.html#explain">https://developer.android.com/training/permissions/requesting.html#explain</a>) and then shows the system permission dialog</p></blockquote>
+
+<p>rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會顯示預設的訊息。</p>
+
+<p>範例：</p>
+
+<pre><code class="javascript">//請求 Camera Permission 為例
+
+async requestCameraPermission() {
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA,
       {
-        &lsquo;title&rsquo;: &lsquo;Cool Photo App Camera Permission&rsquo;,
-        &lsquo;message&rsquo;: &lsquo;Cool Photo App needs access to your camera &rsquo; +
-                   &lsquo;so you can take awesome pictures.&rsquo;
+        'title': 'Cool Photo App Camera Permission',
+        'message': 'Cool Photo App needs access to your camera ' +
+                   'so you can take awesome pictures.'
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log(&ldquo;You can use the camera&rdquo;)
+      console.log("You can use the camera")
     } else {
-      console.log(&ldquo;Camera permission denied&rdquo;)
+      console.log("Camera permission denied")
     }
   } catch (err) {
     console.warn(err)
   }
 }
-```</p>
+</code></pre>
 
 <h3>requestMultiple(permissions)</h3>
 
@@ -106,14 +109,15 @@ rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會�
 
 <p>我的使用流程會先去check 使用者是否已授權此權限，如果沒有的話則向使用者發出請求。</p>
 
-<p>範例：
-```javascript</p>
+<p>範例：</p>
 
-<p>componentWillMount() {
+<pre><code class="javascript">
+componentWillMount() {
   this.checkLocationPermission();
-}</p>
+}
 
-<p>// 檢查使用者的位置授權
+
+// 檢查使用者的位置授權
 async checkLocationPermission() {
   try {
     const granted = await PermissionsAndroid.check(
@@ -129,53 +133,55 @@ async checkLocationPermission() {
   } catch (err) {
     console.warn(err);
   }
-}</p>
+}
 
-<p>async askForGPS() {
+async askForGPS() {
   //如果使用者沒有開啟GPS的話，要去跟他要
   LocationServicesDialogBox.checkLocationServicesIsEnabled({
-      message: &lsquo;<h2>Use Location ?</h2>This app wants to change your device settings:<br/><br/>Use GPS, Wi-Fi, and cell network for location<br/><br/>&rsquo;,
-      ok: &lsquo;YES&rsquo;,
-      cancel: &lsquo;NO&rsquo;
-  }).then((success) => {
+      message: '&lt;h2&gt;Use Location ?&lt;/h2&gt;This app wants to change your device settings:&lt;br/&gt;&lt;br/&gt;Use GPS, Wi-Fi, and cell network for location&lt;br/&gt;&lt;br/&gt;',
+      ok: 'YES',
+      cancel: 'NO'
+  }).then((success) =&gt; {
       //如果使用者有開啟gps才去抓他的位置
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        (position) =&gt; {
           console.log(position.coords.latitude);
           console.log(position.coords.longitude);
         },
-        (error) => { console.log(error); },
+        (error) =&gt; { console.log(error); },
         { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
       );
-      console.log(success); // success => &ldquo;enabled&rdquo;
-  }).catch((error) => {
+      console.log(success); // success =&gt; "enabled"
+  }).catch((error) =&gt; {
       this.setState({ alertVisible: true });
-      console.log(error.message); // error.message => &ldquo;disabled&rdquo;
+      console.log(error.message); // error.message =&gt; "disabled"
   });
-}</p>
+}
 
-<p>async requestLocationPermission() {
+async requestLocationPermission() {
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED  || granted === true) {
-      console.log(&lsquo;現在你獲得GPS權限了&rsquo;);
+      console.log('現在你獲得GPS權限了');
       this.askForGPS();
     } else {
-      console.log(&lsquo;用戶不理你&rsquo;);
+      console.log('用戶不理你');
     }
   } catch (err) {
     console.warn(err);
   }
 }
-```</p>
+</code></pre>
 
-<p>這邊補充說明一下
-<code>javascript
+<p>這邊補充說明一下</p>
+
+<pre><code class="javascript">
   if (granted === PermissionsAndroid.RESULTS.GRANTED  || granted === true){}
-</code>
-這邊要另外寫<code>granted === true</code> 是因為SDK 小於23 的話是回傳 true</p>
+</code></pre>
+
+<p>這邊要另外寫<code>granted === true</code> 是因為SDK 小於23 的話是回傳 true</p>
 
 <blockquote><p>On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so check and request should always be true.</p></blockquote>
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://hsiangyu.com/blog/2017/09/26/git-flow/</loc>
+<lastmod>2017-09-26T14:40:20+08:00</lastmod>
+</url>
+<url>
 <loc>http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/</loc>
 <lastmod>2017-09-04T17:50:59+08:00</lastmod>
 </url>
@@ -40,5 +44,8 @@
 </url>
 <url>
 <loc>http://hsiangyu.com/blog/categories/reactnative/</loc>
+</url>
+<url>
+<loc>http://hsiangyu.com/blog/categories/git/</loc>
 </url>
 </urlset>
