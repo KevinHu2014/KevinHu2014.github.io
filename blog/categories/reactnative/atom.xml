@@ -4,7 +4,7 @@
   <title><![CDATA[Category: reactnative | Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/blog/categories/reactnative/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-09-29T16:03:21+08:00</updated>
+  <updated>2017-11-02T19:09:24+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -34,6 +34,9 @@
 <h2>正文</h2>
 
 <p>深入研究後，才發現在<code>Andoird 6.0 (API 23)</code> 之後，危險權限都需要動態取得使用者授權。貼心的是React Native 有提供 <code>PermissionsAndroid</code> 的 API 來供你使用👏👏</p>
+
+<!--more-->
+
 
 <p>那 <code>PermissionsAndroid</code> 有提供三個 Methods:</p>
 

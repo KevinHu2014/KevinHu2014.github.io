@@ -116,8 +116,6 @@
 
 <time datetime="2017-05-17T23:50:47+08:00" pubdate data-updated="true"></time>
         
-         | <a href="#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -146,6 +144,9 @@
 首先在講<strong>ReactVR</strong>前要先提<strong>WebVR</strong></p>
 
 <p>WebVR簡單來說就是能在web browser上直接觀看VR內容</p>
+
+<!--more-->
+
 
 <p>那要能達到這樣的功能，首先要先來定義統一的規則</p>
 
@@ -304,6 +305,8 @@
   
 
   
+    <a href="https://github.com/KevinHu2014" title="KevinHu2014"><i class="fa fa-github fa-2x"></i></a>
+  
 
   
 
@@ -336,6 +339,35 @@
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/KevinHu2014">@KevinHu2014</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'KevinHu2014',
+            count: 6,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

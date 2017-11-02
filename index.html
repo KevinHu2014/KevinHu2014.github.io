@@ -119,8 +119,6 @@
 
 <time datetime="2017-09-26T14:40:20+08:00" pubdate data-updated="true"></time>
         
-         | <a href="/blog/2017/09/26/git-flow/#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -149,157 +147,12 @@
 
 <p>Git 雖然方便好用，但並沒有提出一套管理分支的方法，而國外有大大整理出一套方法: <a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a>，而這套方法就是大家熟知的Git flow。</p>
 
-<p>Git flow 的主要概念就是他有兩個主要的branch
-<img src="http://nvie.com/img/main-branches@2x.png" alt="" /></p>
-
-<p>分別為master 和 develop</p>
-
-<p>develop是負責開發的分支，而master是給production用的</p>
-
-<p>而次要分支有feature, release 跟hotfix</p>
-
-<p><img src="http://nvie.com/img/git-model@2x.png" alt="" />
-第一次看到這張圖可能會被嚇到吧www ，但這張圖其實沒有想像中的複雜，只比前一張圖多了三個次要分支。</p>
-
-<p>接下來就一一來介紹他們～</p>
-
-<p>首先是feature 分支，使用時機是只要是開發新功能的時候，
-就開新的feature 分支，而當此feature 分支開發完後，
-就將它 merge 回 develop 分支。</p>
-
-<p>再來是release 分支，使用時機是在送出下一版前要修正bug的時候，
-此時就開新的release 分支，而當此release 分支開發完後，讓他同時回到develop 還有 master 分支。</p>
-
-<p>而至於hotfix 分支使用的時機則是在修已上production 後臨時要修bug時，當hotfix 分支開發完後，讓他同時回到develop 還有 master 分支。</p>
-
-<h2>教學</h2>
-
-<p>由於Git flow 不是Git 裡原有的功能，所以我們需要另外安裝作者所提供的<a href="https://github.com/nvie/gitflow">gitflow</a> 工具。</p>
-
-<p>而這裡就以Mac OS X來做教學，並假設你有裝<a href="https://brew.sh/index_zh-tw.html">homebrew</a>。</p>
-
-<h3>安裝</h3>
-
-<pre><code>$ brew install git-flow
-</code></pre>
-
-<h3>為專案加入Git flow</h3>
-
-<pre><code>$ git flow init
-</code></pre>
-
-<h3>建立分支</h3>
-
-<h4>feature</h4>
-
-<p>列出所有的feature branch</p>
-
-<pre><code>$ git flow feature  
-</code></pre>
-
-<p>開啟新的 feature branch</p>
-
-<pre><code>$ git flow feature start &lt;name&gt;
-</code></pre>
-
-<ul>
-<li>name 為你想要的feature 分支名稱</li>
-</ul>
-
-
-<p>結束feature branch</p>
-
-<pre><code>$ git flow feature finish &lt;name&gt;
-</code></pre>
-
-<ul>
-<li>name 為你想要結束的分支名稱</li>
-<li>feature 分支完成後會被 merge進 develop 分支</li>
-</ul>
-
-
-<p>把feature 分支 推到 remote</p>
-
-<pre><code>$ git flow feature publish &lt;name&gt;
-</code></pre>
-
-<ul>
-<li>name 為你想要推的分支名稱</li>
-</ul>
-
-
-<p>把remote的 feature 分支拉下來</p>
-
-<pre><code>$ git flow feature pull &lt;remote&gt; &lt;name&gt;
-</code></pre>
-
-<ul>
-<li>remote 通常是 origin 的樣子? &lt;-  這裡可能還要請大大糾正</li>
-<li>name 為你要拉的分支名稱</li>
-</ul>
-
-
-<h4>release</h4>
-
-<p>列出所有的 release branch</p>
-
-<pre><code>$ git flow release  
-</code></pre>
-
-<p>開啟新的 release branch</p>
-
-<pre><code>$ git flow release start &lt;release&gt;
-</code></pre>
-
-<ul>
-<li>release 為你想要的 release 分支名稱</li>
-</ul>
-
-
-<p>結束 release branch</p>
-
-<pre><code>$ git flow release finish &lt;release&gt;
-</code></pre>
-
-<ul>
-<li>release 為你想要結束的分支名稱</li>
-<li>release 分支完成後會被 merge進 develop 分支 和 master 分支</li>
-</ul>
-
-
-<h4>hotfix</h4>
-
-<p>列出所有的 hotfix branch</p>
-
-<pre><code>$ git flow hotfix  
-</code></pre>
-
-<p>開啟新的 hotfix branch</p>
-
-<pre><code>$ git flow hotfix start &lt;release&gt;
-</code></pre>
-
-<ul>
-<li>release 為你想要的 hotfix 分支名稱</li>
-</ul>
-
-
-<p>結束 hotfix branch</p>
-
-<pre><code>$ git flow hotfix finish &lt;release&gt;
-</code></pre>
-
-<ul>
-<li>hotfix 為你想要結束的分支名稱</li>
-<li>release 分支完成後會被 merge進 develop 分支 和 master 分支</li>
-</ul>
-
-
-<h2>結論</h2>
-
-<p>介紹了那麼多，最後的結論是我們沒有使用Git flow 😂 😂 😂，由於公司專案deploy的很頻繁，基本上master 和 develop 分支是沒有差別的，再者就算使用Git flow 也無法解決 feature 分支很久才回production 的問題，因此還是繼續使用原本的Github flow來當作我們的 workflow，不過剛好趁這個機會我也對Git flow 有進一步的認識。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/09/26/git-flow/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -328,8 +181,6 @@
 
 <time datetime="2017-09-04T17:50:59+08:00" pubdate data-updated="true"></time>
         
-         | <a href="/blog/2017/09/04/react-native-permissionsandroid/#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -352,265 +203,12 @@
 
 <p>深入研究後，才發現在<code>Andoird 6.0 (API 23)</code> 之後，危險權限都需要動態取得使用者授權。貼心的是React Native 有提供 <code>PermissionsAndroid</code> 的 API 來供你使用👏👏</p>
 
-<p>那 <code>PermissionsAndroid</code> 有提供三個 Methods:</p>
-
-<h3>check (permission)</h3>
-
-<p>檢查權限</p>
-
-<blockquote><p>Returns a promise resolving to a boolean value as to whether the specified permissions has been granted</p></blockquote>
-
-<p>範例：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//檢查 Loaction Permission 為例</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">async</span> <span class="nx">checkLocationPermission</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span>
-</span><span class='line'>        <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">ACCESS_FINE_LOCATION</span>
-</span><span class='line'>      <span class="p">);</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;客官已授予位置的權限&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;客官尚未授予位置權限&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>request(permission, rationale?)</h3>
-
-<p>請求權限</p>
-
-<blockquote><p>Prompts the user to enable a permission and returns a promise resolving to a string value indicating whether the user allowed or denied the request</p>
-
-<p>If the optional rationale argument is included (which is an object with a title and message), this function checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (<a href="https://developer.android.com/training/permissions/requesting.html#explain">https://developer.android.com/training/permissions/requesting.html#explain</a>) and then shows the system permission dialog</p></blockquote>
-
-<p>rationale的參數可有可無，如果沒有的話，跳窗（dialog）就會顯示預設的訊息。</p>
-
-<p>範例：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//請求 Camera Permission 為例</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">async</span> <span class="nx">requestCameraPermission</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span>
-</span><span class='line'>      <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">CAMERA</span><span class="p">,</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>        <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Cool Photo App Camera Permission&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;message&#39;</span><span class="o">:</span> <span class="s1">&#39;Cool Photo App needs access to your camera &#39;</span> <span class="o">+</span>
-</span><span class='line'>                   <span class="s1">&#39;so you can take awesome pictures.&#39;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;You can use the camera&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Camera permission denied&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>requestMultiple(permissions)</h3>
-
-<p>請求多個權限</p>
-
-<blockquote><p>Prompts the user to enable multiple permissions in the same dialog and returns an object with the permissions as keys and strings as values indicating whether the user allowed or denied the request</p></blockquote>
-
-<h3>使用流程</h3>
-
-<p>我的使用流程會先去check 使用者是否已授權此權限，如果沒有的話則向使用者發出請求。</p>
-
-<p>範例：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">checkLocationPermission</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 檢查使用者的位置授權</span>
-</span><span class='line'><span class="nx">async</span> <span class="nx">checkLocationPermission</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span>
-</span><span class='line'>      <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">ACCESS_FINE_LOCATION</span>
-</span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span> <span class="o">||</span> <span class="nx">granted</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">// 有拿到授權才去要 GPS</span>
-</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">askForGPS</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">// 沒有授權的話就去向使用者請求</span>
-</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">requestLocationPermission</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">async</span> <span class="nx">askForGPS</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">//如果使用者沒有開啟GPS的話，要去跟他要</span>
-</span><span class='line'>  <span class="nx">LocationServicesDialogBox</span><span class="p">.</span><span class="nx">checkLocationServicesIsEnabled</span><span class="p">({</span>
-</span><span class='line'>      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;&lt;h2&gt;Use Location ?&lt;/h2&gt;This app wants to change your device settings:&lt;br/&gt;&lt;br/&gt;Use GPS, Wi-Fi, and cell network for location&lt;br/&gt;&lt;br/&gt;&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="nx">ok</span><span class="o">:</span> <span class="s1">&#39;YES&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="nx">cancel</span><span class="o">:</span> <span class="s1">&#39;NO&#39;</span>
-</span><span class='line'>  <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">success</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">//如果使用者有開啟gps才去抓他的位置</span>
-</span><span class='line'>      <span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span>
-</span><span class='line'>        <span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">latitude</span><span class="p">);</span>
-</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">longitude</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">},</span>
-</span><span class='line'>        <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> <span class="p">},</span>
-</span><span class='line'>        <span class="p">{</span> <span class="nx">enableHighAccuracy</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">timeout</span><span class="o">:</span> <span class="mi">20000</span><span class="p">,</span> <span class="nx">maximumAge</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">},</span>
-</span><span class='line'>      <span class="p">);</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span> <span class="c1">// success =&gt; &quot;enabled&quot;</span>
-</span><span class='line'>  <span class="p">}).</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">alertVisible</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// error.message =&gt; &quot;disabled&quot;</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">async</span> <span class="nx">requestLocationPermission</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span>
-</span><span class='line'>      <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">PERMISSIONS</span><span class="p">.</span><span class="nx">ACCESS_FINE_LOCATION</span>
-</span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span>  <span class="o">||</span> <span class="nx">granted</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;現在你獲得GPS權限了&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">askForGPS</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;用戶不理你&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這邊補充說明一下</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span> <span class="o">===</span> <span class="nx">PermissionsAndroid</span><span class="p">.</span><span class="nx">RESULTS</span><span class="p">.</span><span class="nx">GRANTED</span>  <span class="o">||</span> <span class="nx">granted</span> <span class="o">===</span> <span class="kc">true</span><span class="p">){}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>這邊要另外寫<code>granted === true</code> 是因為SDK 小於23 的話是回傳 true</p>
-
-<blockquote><p>On devices before SDK version 23, the permissions are automatically granted if they appear in the manifest, so check and request should always be true.</p></blockquote>
-
-<h3>叮嚀</h3>
-
-<p>在測試這塊的時候要記得，除了測 SDK >= 23的版本之外， SDK &lt; 23 的也要記得測試。</p>
-
-<h2>參考資料</h2>
-
-<p><a href="https://facebook.github.io/react-native/docs/permissionsandroid.html">https://facebook.github.io/react-native/docs/permissionsandroid.html</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/09/04/react-native-permissionsandroid/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -638,8 +236,6 @@
 
 
 <time datetime="2017-05-17T23:50:47+08:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2017/05/17/facebook-developer-circle/#disqus_thread">Comments</a>
         
       </p>
     
@@ -670,78 +266,12 @@
 
 <p>WebVR簡單來說就是能在web browser上直接觀看VR內容</p>
 
-<p>那要能達到這樣的功能，首先要先來定義統一的規則</p>
-
-<p>這樣各家廠商實作時才有標準可以依循，確保同一份內容能正確呈現在不同平台上</p>
-
-<p>而規格定義了WebVR API 和 Hand Position API</p>
-
-<p>目前實作這些規格的廠商少了ㄧ家（Safari , Apple）</p>
-
-<p>現況下兩大主流的WebVR框架為
-+ Mozilla 的 Aframe
-+ Facebook 的 ReactVR</p>
-
-<p>high level &mdash;&mdash;&mdash;> low level</p>
-
-<p>react-aframe -> Arame -> {ThreeJS|WebGL|WebVR}</p>
-
-<p>ReactVR -> OVRUI -> {ThreeJS|WebGL|WebVR}</p>
-
-<p><strong>兩者的比較</strong>（擷取自<a href="https://github.com/facebook/react-vr/issues/18#issuecomment-267622361">amberroy的留言</a>）</p>
-
-<ul>
-<li><p>React VR apps are written in JavaScript, with JSX tags that are transpiled into JS. A-Frame apps use HTML, with custom HTML tags (whether this is advantage or disadvantage depends if you want to code in JS or HTML :) although A-Frame components are built with JavaScript.</p></li>
-<li><p>React VR is based on the React core (in production use since 2011, open sourced in 2013) and A-Frame is written from scratch (mid-to-late 2015). So contributing back to a-frame is not possible since they have different underlying implementations.</p></li>
-<li><p>React VR is build on top of React Native, with a JS runtime for WebVR, while aframe-react is a very thin layer on top of A-Frame to bridge with React JS.</p></li>
-</ul>
-
-
-<p>ReactVR 的優勢是基本上只要你會React 或是 ReactNative 就能無痛立即開發</p>
-
-<p>總結來說VR至少還要2~5年才成熟</p>
-
-<h2>Self-Serve Facebook Ads w/ Marketing API</h2>
-
-<p>這部分由於我本身沒有接觸過Facebook的廣告，所以就沒有特別紀錄</p>
-
-<p>詳細的請直接參考<a href="https://speakerdeck.com/clementtang/self-serve-facebook-ads-with-marketing-api">投影片</a></p>
-
-<h2>F8 Highlights</h2>
-
-<p>這裡主要提兩個跟公司有正相關的服務</p>
-
-<p>首先是 <a href="https://developers.facebook.com/docs/accountkit"><strong>Account Kit</strong></a></p>
-
-<p>這項服務主要是讓用戶只需使用電話號碼或電子郵件地址就能快速註冊並登入您的應用程式，完全無需密碼。它不但可靠、容易使用，並且提供另一個註冊應用程式的選擇。</p>
-
-<p>在前年F8的時候就提出了，不過我目前還是觀望中，不知道是否真的如圖中的show case那麼厲害。
-<a href="https://postimg.org/image/3mye80bgn/"><img src="https://s15.postimg.org/sg7y8nuh7/18552931_1327014974042542_1341671821_o.jpg" alt="18552931_1327014974042542_1341671821_o.jpg" /></a></p>
-
-<p>另一項是 <a href="https://developers.facebook.com/docs/places"><strong> Places Graph </strong></a></p>
-
-<p>這基本上可以看成是Geocoding的服務，</p>
-
-<p>使用時機像是如果你今天使用<a href="https://developers.google.com/places/?hl=zh-tw">Google Places API</a>的時候，常常遇到這樣的問題</p>
-
-<blockquote><p> Google Places API for iOS 擷取之地點位置時所使用的任何地圖都是 Google 地圖。</p></blockquote>
-
-<p>或是你使用Mapbox 的Geocoding</p>
-
-<blockquote><p>The results from geocoding with the mapbox.places mode must be displayed on a Mapbox map&hellip;</p></blockquote>
-
-<p>這樣的限制使得你無法在地圖上使用其他地圖的Geocoding服務</p>
-
-<p>但現在有了Facebook Places Graph 的服務</p>
-
-<p>你能輕鬆為你的地圖擴充打卡建議點</p>
-
-<h2>後記</h2>
-
-<p>這次的開發者聚會真的是受益良多，也感謝主辦單位提供場地與食物
-<a href="https://postimg.org/image/4zahi59jj/"><img src="https://s27.postimg.org/nrmclq5xv/18486041_10154609245768595_8209573010552021913_n.jpg" alt="18486041_10154609245768595_8209573010552021913_n.jpg" /></a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/05/17/facebook-developer-circle/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -769,8 +299,6 @@
 
 
 <time datetime="2017-03-25T22:56:08+08:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2017/03/25/moed19ct/#disqus_thread">Comments</a>
         
       </p>
     
@@ -807,35 +335,12 @@
 
 <p>接下來是自我介紹，參加這次活動的有中文系畢業的、工程師、新聞業的朋友、美術、還有外國人。然後就進入午餐時段（pizza）。</p>
 
-<p>我一開始先參與<strong>新竹市事故血漬典</strong>的專案，這個專案的構想是新竹上下班的時間，機車族其實每次都滿膽戰心驚。這個專案想知道哪些路口是危險的，透過過往發生事故的地址做參考，並以熱度圖的形式視覺化這些資料。
-剛好我在大三資料庫專題的時候有做過類似的應用（將交通事故的點以clustering的形式呈現在手機地圖上），當時是拿警政署的A2和A3的交通事故資訊來用，由於這個Open Data只有紀錄事故地址，而非沒有確切的經緯度，因此得額外做Geocoding，才能將事故點顯示在地圖上。
-A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時間內Geocoding那麼多點其實是有困難的，我手邊還留著當時Geocoding好的一些資料，所以就直接提供給坑主做使用。
-坑主將我提供的csv資料匯入Google的fusion table 工具來製作熱點圖。</p>
-
-<p>下午我參與了另一個<strong>itaigi 愛台語</strong>的專案，這個專案主要功能是輸入華語能查台語的發音。我在玩愛台語的網站時剛好發現有些此的台語發音在Chrome上也無法使用，後來丞宏發現是因為server掛掉，當時想說若要偵測server是不是活的，可以做一個<strong><em>發音有問題</em></strong> 的回報按鈕，並且紀錄瀏覽器與時間。我的跳坑之旅也就這樣開始了&hellip;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//抓取使用者的瀏覽器版本和作業系統</span>
-</span><span class='line'><span class="kd">let</span> <span class="nx">appVersion</span> <span class="o">=</span> <span class="nx">navigator</span><span class="p">.</span><span class="nx">appVersion</span><span class="p">;</span>
-</span><span class='line'><span class="c1">//紀錄時間</span>
-</span><span class='line'><span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-</span><span class='line'><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">();</span>
-</span><span class='line'><span class="c1">//將結果先以console的形式呈現，之後丞宏在把它並到後端</span>
-</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;沒有發音\n&#39;</span> <span class="o">+</span> <span class="s1">&#39;時間：&#39;</span> <span class="o">+</span> <span class="nx">n</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span> <span class="o">+</span> <span class="s1">&#39;appVersion: &#39;</span> <span class="o">+</span> <span class="nx">appVersion</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>心得</h2>
-
-<p>這次的黑客松體驗非常好，比起以往比賽式的黑客松，在有限時間完成一個小型prototype來說，輕鬆許多，與人的交流才是重點，你可以同時參與多個不同性質的專案，而這也是我第一次體驗深刻體會到開源貢獻的重要性，感覺朝夢想更進了一步，（我的夢想是用科技的力量讓生活變得更方便），對我這個興趣使然的工程師來說，參與這種活動可以說是一大享受，未來我一定會持續參與這類的活動。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/03/25/moed19ct/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -863,8 +368,6 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 
 
 <time datetime="2017-03-19T23:53:54+08:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2017/03/19/iching-chatbot/#disqus_thread">Comments</a>
         
       </p>
     
@@ -896,184 +399,12 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 
 <p>What 的部分可以看到我目前的成果</p>
 
-<h1>Why ?</h1>
-
-<p>為何要做易經數字占卜Chatbot呢?</p>
-
-<p>這就要從去年輔大校慶前，梅大在臉書上的po文說起</p>
-
-<blockquote><p>今年校慶無法到校見到系友, 特別開放網路占卦三天(12/3-12/5). 若有需要請私訊</p></blockquote>
-
-<h2>然後我錯過了!!!</h2>
-
-<p>留言的部分老師提到</p>
-
-<blockquote><p>要排隊了. Po 文後, 一直占卦, 還沒停下來</p></blockquote>
-
-<p>當時我想 何不做一個占卜的Chatbot呢？</p>
-
-<p>但由於那時的我對易經一無所知，所以果斷放棄 (´_ゝ`)</p>
-
-<p>這學期剛好有修梅大的<a href="https://sls.weco.net/s17-IChing">易經資訊學</a>，沒想到第一堂課，老師就教了如何用易經占卜</p>
-
-<p>在興趣使然下，我開始了開發易經數字占卜Chatbot的旅程</p>
-
-<h1>How ?</h1>
-
-<p>在去年FB Chatbot剛推出的時候，我剛好有走過tutorial，所以我直接有現成的bot可以改改</p>
-
-<p>Server的部分，我將Chatbot部署在<a href="https://www.heroku.com/">Heroku</a>上</p>
-
-<p>易經資料的部分由於沒有找到現成的Api可以call，所以打算自己硬幹</p>
-
-<p>在網路上有查到<a href="http://www.eee-learning.com"><strong>易學網</strong></a>有現成的易經今解可以用，</p>
-
-<p><a href="http://www.eee-learning.com/book/neweee01">http://www.eee-learning.com/book/neweee01</a></p>
-
-<p>從網址的結尾發現是有規律的 neweee01到 neweee64，
-這樣一來資料的部分就解決一大半了，在來面臨的問題是先天八卦表要怎麼mapping呢？ 我的解法比較暴力xDD</p>
-
-<p>我直接看64掛表來一個個掛寫上對應的數字wwwwww</p>
-
-<p>接著只要照簡易數字卦占卜的規則，就能找出卦來</p>
-
-<p>最後使用Cards的形式附加上易學網的易經今解網址就完成了</p>
-
-<p>但是這樣使用者還是無從得知爻辭的部分要參考哪一個</p>
-
-<p>在設計上還需要再friendly一些，</p>
-
-<p>可是要如何得知道變爻的部分呢？</p>
-
-<p>在看了幾篇易經今解後，我找出了內容上大致上的規律</p>
-
-<p>每一篇大致上都會以經文作為開頭</p>
-
-<blockquote><p>乾，元亨利貞。初九，潛龍勿用。九二，見龍在田，利見大人。九三，君子終日乾乾，夕惕若，厲无咎。九四，或躍在淵，无咎。九五，飛龍在天，利見大人。上九，亢龍有悔。用九，見群龍无首，吉。</p></blockquote>
-
-<p>從這篇經文中可以看出它的規律可以使用句點將其拆開為</p>
-
-<blockquote><p>乾，元亨利貞。</p>
-
-<p>初九，潛龍勿用。</p>
-
-<p>九二，見龍在田，利見大人。</p>
-
-<p>九三，君子終日乾乾，夕惕若，厲无咎。</p>
-
-<p>九四，或躍在淵，无咎。</p>
-
-<p>九五，飛龍在天，利見大人。</p>
-
-<p>上九，亢龍有悔。用九，見群龍无首，吉。</p></blockquote>
-
-<p>找到規律後，我用python寫了爬蟲，</p>
-
-<p>將易學網上共64卦的易經今解資料給爬下來，並輸出成txt，仔細看了這些爬下來的資料，</p>
-
-<p>發現並不是所有的經文都符合上述的規則 (╯‵□′)╯︵┴─┴</p>
-
-<p>像是</p>
-
-<blockquote><p>元亨，利牝馬之貞。君子有攸往，先迷，後得主利。西南得朋，東北喪朋，安貞吉。初六，履霜，堅冰至。六二，直方大，不習无不利。六三，含章可貞，或從王事，无成有終。六四，括囊，无咎无譽。六五，黃裳，元吉。上六，龍戰于野，其血玄黃。用六，利永貞。</p></blockquote>
-
-<p>拆解完會得到</p>
-
-<blockquote><p>元亨，利牝馬之貞。</p>
-
-<p>君子有攸往，先迷，後得主利。</p>
-
-<p>西南得朋，東北喪朋，安貞吉。</p>
-
-<p>初六，履霜，堅冰至。</p>
-
-<p>六二，直方大，不習无不利。</p>
-
-<p>六三，含章可貞，或從王事，无成有終。</p>
-
-<p>六四，括囊，无咎无譽。</p>
-
-<p>六五，黃裳，元吉。</p>
-
-<p>上六，龍戰于野，其血玄黃。</p>
-
-<p>用六，利永貞。</p></blockquote>
-
-<p>但看似大部分的經文都符合此規則，因此我使用了excel的資料剖析精靈，將txt的資料丟入後，以句號將資料分割成不同的欄位，然後把不合規則的欄位做手動調整，才得出乾淨的資料。</p>
-
-<p>由於這些資料都是只是顯示而已，沒有必要用到資料庫，本來想說直接用js去讀csv，但查了資料感覺好麻煩，還是用json格式最方便，在網路上找了excel to json
-的線上工具做了轉換。</p>
-
-<p>最後在js的程式中去讀json的資料。</p>
-
-<h1>What ?</h1>
-
-<p>以下截圖為目前成果</p>
-
-<p><img src="https://s19.postimg.org/b402krsv7/2017_03_20_2_13_51.png" alt="alt tag" /></p>
-
-<p><img src="https://s19.postimg.org/4wooklx43/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7_2017_03_20_%E4%B8%8A%E5%8D%882_40_33.png" alt="alt tag" /></p>
-
-<p>點擊 查看爻辭 會跳轉到 <a href="http://www.eee-learning.com/book/neweee33">http://www.eee-learning.com/book/neweee33</a></p>
-
-<p><img src="https://s19.postimg.org/7bl5is2qr/2017_03_20_11_27_43.png" alt="alt tag" /></p>
-
-<p>點擊 查看卦辭 會跳轉到 <a href="http://www.eee-learning.com/simple64/33">http://www.eee-learning.com/simple64/33</a></p>
-
-<h1>後記</h1>
-
-<h3>近期 ToDoList</h3>
-
-<ul>
-<li>加入使用正規表達式</li>
-<li>直接在Cards裡顯示爻辭與卦辭的解釋</li>
-<li>加入privacy policy</li>
-<li>招募測試人員</li>
-<li>提交應用程式進行審查</li>
-</ul>
-
-
-<p>目前在使用者輸入的部分還沒有做正規表達式的部分，
-此外在Cards裡顯示的資訊也不夠完整，我打算再寫爬蟲把
-易學網上的資料爬下來進行分析。</p>
-
-<p>在梅大的文中，Alan學長有提到privacy policy的部分，這點要特別注意，由於這個Chatbot有可能變向收集使用者的資料，所以加上privacy policy會比較保險。</p>
-
-<p>在正式上線前會先進行測試，有興趣成為測試者的歡迎mail我  ( <strong>kevinhu@weco.net</strong> )，你們的feedback非常重要!!</p>
-
-<h2>未來展望</h2>
-
-<ul>
-<li>解卦者的串接</li>
-<li>加入Payments的功能</li>
-</ul>
-
-
-<p>目前自己使用這個Chatbot發現有個問題，
-卜卦者可能會看不懂爻辭的解釋，</p>
-
-<p>會需要有經驗的解卦人來做進一步的解釋。
-像是我上次占卜要不要換駕訓班的教練，</p>
-
-<p>得到的結果是<strong><em>井卦 (水風井) 的九三</em></strong></p>
-
-<blockquote><p>九三，井渫不食，為我心惻。可用汲，王明，並受其福。</p>
-
-<p>《象》曰：井渫不食，行惻也；求王明，受福也。</p>
-
-<p>水井再次湧出甘甜的泉水，可以為人所飲用，然而因為之前水井壞掉，壞名聲在前，所以還不能讓人所接納。若有英明而有眼光的大王來取用，眾人也可以同享福報。</p>
-
-<p>井渫不食，為我心惻：井水清澈乾淨，卻沒人飲用，讓人感到傷心。比喻君子修德有成，但仍懷才不遇，道德不行。渫，音謝，除去污泥，說明井水已經乾淨清澈，可以飲用。心惻，傷心。惻，傷心的樣子。</p>
-
-<p>王明，並受其福：君王英明，有智慧，眾人將會因此而得到其福祉。有智慧的英明君王，當能選用人才，因此而福惠人民。</p></blockquote>
-
-<p>看完爻辭後，發現還是霧煞煞 ┐(´д`)┌</p>
-
-<p>因此未來如果有機會的話，會想去串接一些有經驗的解卦人，</p>
-
-<p>來為這個服務加值，同時導入<a href="https://developers.facebook.com/docs/messenger-platform/complete-guide/payments">Payments</a>的功能，讓這個Chatbot的更加完善。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/03/19/iching-chatbot/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -1102,8 +433,6 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 
 <time datetime="2017-02-23T11:44:02+08:00" pubdate data-updated="true"></time>
         
-         | <a href="/blog/2017/02/23/nisra-hackathon-2017/#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -1120,70 +449,12 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 
 <p>這次的黑客松在參賽前就想好題目了，剛好因為研究所的計劃要做一個LBGM，所以想說來做一個LBGM版的小精靈遊戲，這個題目是受到Google在2015年彩蛋（是能在Google Maps上玩小精靈）的啟發，但當時好像只Web版而已，沒有真正的Loaction Base，有此想說如果用React Native來做一個，應該蠻有挑戰的。</p>
 
-<p>當年彩蛋的截圖</p>
-
-<p><img src="https://camo.githubusercontent.com/3df8af60dfc1dafbdb0125081704c7c5baa512aa/68747470733a2f2f63646e302e746e7763646e2e636f6d2f77702d636f6e74656e742f626c6f67732e6469722f312f66696c65732f323031352f30332f476f6f676c654d6170735061634d616e2d373330783334332e706e67" title="當年彩蛋的截圖" alt="alt text" /></p>
-
-<h3> 小精靈規則簡介與遊戲構想</h3>
-
-<p>玩家為小精靈，
-遊戲中會出現鬼魂，
-被鬼魂碰到的話就輸了。
-迷宮為使用者所在地圖，
-豆子會出現在街道上，玩家吃了豆子會得分。
-大力丸會出現在特殊地點（lbs），
-大力丸提供小精靈一小段時間，可以反過來吃掉鬼魂。鬼魂在這段時間內會變成深藍色，會往反方向逃逸，而且比平常的移動速度慢。當鬼魂被吃掉時，它的眼睛還在，會飛回鬼屋，並再生而回復正常的顏色。</p>
-
-<p>最後的遊戲積分可以轉換成金錢
-金錢可以購買skin</p>
-
-<p>遊戲積分可以分享到社群</p>
-
-<p>運動的里程數當做成就</p>
-
-<p>達成一定成就可以拿錢</p>
-
-<h3>技術選用</h3>
-
-<p>由於以前有摸過<a href="https://www.mapbox.com/">Mapbox</a>，而且<a href="https://www.mapbox.com/studio/">Mapbox Studio</a>的高度客制化功能剛好是我要的，因此地圖選擇使用Mapbox。</p>
-
-<p><a href="http://facebook.github.io/react-native/">React Native</a>的部分因為他真的很強大，在不偷跑的情況下要在短短的兩天內做出一個可以看的App，使用它真的會方便許多。</p>
-
-<p>豆子的產生是由銓哥用C++程式寫的，主要原理是先在地圖道路上選兩個點，然後由其中一點向另一點不停打點。由於如果要在全地圖打點有點麻煩，所以我們一開始的考量就是只在輔大的地圖上打點就好，這些點算是Hard Code哈哈。</p>
-
-<p>配色的啟發是在黑客松前幾天剛好在medium上看到一篇在講 <a href="https://medium.muz.li/color-trend-2016-2017-c40e34f08f2c#.bhrqrvors">Color trend 2016/2017</a></p>
-
-<h2>成果</h2>
-
-<p>實際在校園裡遊玩的螢幕錄影</p>
-
-<p><img src="https://github.com/KevinHu2014/Pacman/blob/master/screenshots/demo.gif?raw=true" title="Demo" alt="alt text" /></p>
-
-<p>Zoom in 地圖</p>
-
-<p><img src="https://github.com/KevinHu2014/Pacman/blob/master/screenshots/01.png?raw=true" title="Demo" alt="alt text" /></p>
-
-<p>Zoom out 地圖</p>
-
-<p><img src="https://github.com/KevinHu2014/Pacman/blob/master/screenshots/02.png?raw=true" title="Demo" alt="alt text" /></p>
-
-<h2>遊戲玩法</h2>
-
-<p>在地圖的右下角有三個按鈕，從上到下分別是<strong>磁鐵</strong>、<strong>定位回中心</strong>與<strong>地圖縮放</strong>。</p>
-
-<p><strong>磁鐵</strong>: 是用來吸收玩家附近的豆子，我們改良了經典的小精靈的玩法</p>
-
-<p><strong>定位回中心</strong>:  由於地圖是可以滑動的，怕玩家在滑動後位子會跑掉，因此設計了這個按鍵，讓地圖可以迅速回到中心（以使用者的位置為中心）。</p>
-
-<p><strong>地圖縮放</strong>: 我們只設定了兩種zoom level</p>
-
-<h2>心得</h2>
-
-<p>這次非常感謝老楊與銓哥兩位夥伴陪我這個係邊參加黑客松，雖然最後只拿到第三名，但已滿足哈哈哈。 要用React Native做遊戲真的不容易，尤其是沒有什麼遊戲引擎可以用，要什麼新增什麼酷炫功能都要自己來。</p>
-
-<p><img src="https://s10.postimg.org/w4jprbi4p/16251219_120300001783519418_1984515907_o.jpg" title="第三名" alt="alt text" /></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/02/23/nisra-hackathon-2017/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -1220,6 +491,8 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
   
 
   
+    <a href="https://github.com/KevinHu2014" title="KevinHu2014"><i class="fa fa-github fa-2x"></i></a>
+  
 
   
 
@@ -1252,6 +525,35 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/KevinHu2014">@KevinHu2014</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'KevinHu2014',
+            count: 6,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

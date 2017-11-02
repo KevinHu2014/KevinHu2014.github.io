@@ -117,8 +117,6 @@
 
 <time datetime="2017-02-23T11:44:02+08:00" pubdate data-updated="true"></time>
         
-         | <a href="#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -134,6 +132,9 @@
 <h2>正文</h2>
 
 <p>這次的黑客松在參賽前就想好題目了，剛好因為研究所的計劃要做一個LBGM，所以想說來做一個LBGM版的小精靈遊戲，這個題目是受到Google在2015年彩蛋（是能在Google Maps上玩小精靈）的啟發，但當時好像只Web版而已，沒有真正的Loaction Base，有此想說如果用React Native來做一個，應該蠻有挑戰的。</p>
+
+<!--more-->
+
 
 <p>當年彩蛋的截圖</p>
 
@@ -282,6 +283,8 @@
   
 
   
+    <a href="https://github.com/KevinHu2014" title="KevinHu2014"><i class="fa fa-github fa-2x"></i></a>
+  
 
   
 
@@ -314,6 +317,35 @@
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/KevinHu2014">@KevinHu2014</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'KevinHu2014',
+            count: 6,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-09-29T16:03:21+08:00</updated>
+  <updated>2017-11-02T19:09:24+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -40,6 +40,9 @@
 <p>而本文主要把重點放在Git flow。</p>
 
 <p>Git 雖然方便好用，但並沒有提出一套管理分支的方法，而國外有大大整理出一套方法: <a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a>，而這套方法就是大家熟知的Git flow。</p>
+
+<!--more-->
+
 
 <p>Git flow 的主要概念就是他有兩個主要的branch
 <img src="http://nvie.com/img/main-branches@2x.png" alt="" /></p>
@@ -214,6 +217,9 @@
 <h2>正文</h2>
 
 <p>深入研究後，才發現在<code>Andoird 6.0 (API 23)</code> 之後，危險權限都需要動態取得使用者授權。貼心的是React Native 有提供 <code>PermissionsAndroid</code> 的 API 來供你使用👏👏</p>
+
+<!--more-->
+
 
 <p>那 <code>PermissionsAndroid</code> 有提供三個 Methods:</p>
 
@@ -504,6 +510,9 @@
 
 <p>WebVR簡單來說就是能在web browser上直接觀看VR內容</p>
 
+<!--more-->
+
+
 <p>那要能達到這樣的功能，首先要先來定義統一的規則</p>
 
 <p>這樣各家廠商實作時才有標準可以依循，確保同一份內容能正確呈現在不同平台上</p>
@@ -612,6 +621,9 @@
 
 <p>接下來是自我介紹，參加這次活動的有中文系畢業的、工程師、新聞業的朋友、美術、還有外國人。然後就進入午餐時段（pizza）。</p>
 
+<!--more-->
+
+
 <p>我一開始先參與<strong>新竹市事故血漬典</strong>的專案，這個專案的構想是新竹上下班的時間，機車族其實每次都滿膽戰心驚。這個專案想知道哪些路口是危險的，透過過往發生事故的地址做參考，並以熱度圖的形式視覺化這些資料。
 剛好我在大三資料庫專題的時候有做過類似的應用（將交通事故的點以clustering的形式呈現在手機地圖上），當時是拿警政署的A2和A3的交通事故資訊來用，由於這個Open Data只有紀錄事故地址，而非沒有確切的經緯度，因此得額外做Geocoding，才能將事故點顯示在地圖上。
 A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時間內Geocoding那麼多點其實是有困難的，我手邊還留著當時Geocoding好的一些資料，所以就直接提供給坑主做使用。
@@ -671,6 +683,9 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 <p>How 的部分會簡單敘述我的製作過程</p>
 
 <p>What 的部分可以看到我目前的成果</p>
+
+<!--more-->
+
 
 <h1>Why ?</h1>
 
@@ -866,6 +881,9 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
 <h2>正文</h2>
 
 <p>這次的黑客松在參賽前就想好題目了，剛好因為研究所的計劃要做一個LBGM，所以想說來做一個LBGM版的小精靈遊戲，這個題目是受到Google在2015年彩蛋（是能在Google Maps上玩小精靈）的啟發，但當時好像只Web版而已，沒有真正的Loaction Base，有此想說如果用React Native來做一個，應該蠻有挑戰的。</p>
+
+<!--more-->
+
 
 <p>當年彩蛋的截圖</p>
 

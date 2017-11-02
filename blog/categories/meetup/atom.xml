@@ -4,7 +4,7 @@
   <title><![CDATA[Category: meetup | Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/blog/categories/meetup/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-09-29T16:03:21+08:00</updated>
+  <updated>2017-11-02T19:09:24+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -41,6 +41,9 @@
 首先在講<strong>ReactVR</strong>前要先提<strong>WebVR</strong></p>
 
 <p>WebVR簡單來說就是能在web browser上直接觀看VR內容</p>
+
+<!--more-->
+
 
 <p>那要能達到這樣的功能，首先要先來定義統一的規則</p>
 
