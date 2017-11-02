@@ -10,6 +10,9 @@ categories: meetup
 
 
 [![18489614_1326777600732946_7004909634724846760_o.jpg](https://s11.postimg.org/im1dmayrn/18489614_1326777600732946_7004909634724846760_o.jpg)](https://postimg.org/image/bvkwcvblr/)
+
+
+
 ## 正文
 
 此次的主題主要有三個
@@ -23,6 +26,8 @@ Jeremy Lu 的介紹淺顯易懂，
 首先在講**ReactVR**前要先提**WebVR**
 
 WebVR簡單來說就是能在web browser上直接觀看VR內容
+
+<!--more-->
 
 那要能達到這樣的功能，首先要先來定義統一的規則
 

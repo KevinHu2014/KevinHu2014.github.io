@@ -21,6 +21,7 @@ Simon Sinek的名言
 
 >People don't buy what you do; they buy why you do it.
 
+
 受到Simon Sinek的黃金圈理論所啟發，這次打算從Why開始寫起。
 
 Why 的部分說明為何要做易經數字占卜Chatbot
@@ -29,6 +30,7 @@ How 的部分會簡單敘述我的製作過程
 
 What 的部分可以看到我目前的成果
 
+<!--more-->
 
 # Why ?
 為何要做易經數字占卜Chatbot呢?

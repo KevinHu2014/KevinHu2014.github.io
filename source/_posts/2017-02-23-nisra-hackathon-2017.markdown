@@ -16,6 +16,8 @@ categories: Hackathon
 ## 正文
 這次的黑客松在參賽前就想好題目了，剛好因為研究所的計劃要做一個LBGM，所以想說來做一個LBGM版的小精靈遊戲，這個題目是受到Google在2015年彩蛋（是能在Google Maps上玩小精靈）的啟發，但當時好像只Web版而已，沒有真正的Loaction Base，有此想說如果用React Native來做一個，應該蠻有挑戰的。
 
+<!--more-->
+
 當年彩蛋的截圖
 
 ![alt text](https://camo.githubusercontent.com/3df8af60dfc1dafbdb0125081704c7c5baa512aa/68747470733a2f2f63646e302e746e7763646e2e636f6d2f77702d636f6e74656e742f626c6f67732e6469722f312f66696c65732f323031352f30332f476f6f676c654d6170735061634d616e2d373330783334332e706e67 "當年彩蛋的截圖")

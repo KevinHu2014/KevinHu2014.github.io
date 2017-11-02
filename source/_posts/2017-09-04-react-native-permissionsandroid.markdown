@@ -22,7 +22,7 @@ categories: ReactNative
 ## 正文
 
 深入研究後，才發現在`Andoird 6.0 (API 23)` 之後，危險權限都需要動態取得使用者授權。貼心的是React Native 有提供 `PermissionsAndroid` 的 API 來供你使用👏👏
-
+<!--more-->
 那 `PermissionsAndroid` 有提供三個 Methods:
 
 ### check (permission)

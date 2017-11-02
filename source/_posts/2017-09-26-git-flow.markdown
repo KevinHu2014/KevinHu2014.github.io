@@ -23,6 +23,7 @@ Flow 翻成中文是 『水流』的意思，這裡我們可以理解成工作�
 
 Git 雖然方便好用，但並沒有提出一套管理分支的方法，而國外有大大整理出一套方法: [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)，而這套方法就是大家熟知的Git flow。
 
+<!--more-->
 
 Git flow 的主要概念就是他有兩個主要的branch
 ![](http://nvie.com/img/main-branches@2x.png)
