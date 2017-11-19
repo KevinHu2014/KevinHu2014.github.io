@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>宅學習批改器 - Hsiangyu's Blog</title>
+  <meta name="author" content="Hsiangyu">
+
+  
+  <meta name="description" content="前言 由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。 首先，學生會在一個名為宅學習的平臺上撰寫作業，寫完後存檔會得到一個unique的URL，接著將這個URL貼到臉書課程社團的作業繳交貼文之留言處。
+然後助教在改作業時，就要點擊留言的網址，切換瀏覽器分頁， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hsiangyu.com/blog/2017/11/08/sls-prettify/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hsiangyu's Blog" type="application/atom+xml">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700,900' rel='stylesheet' type='text/css'>
+
+
+	<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-58886830-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <style>html{background: url(/images/background.png) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}</style>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+</hgroup>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">宅學習批改器</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-08T11:04:39+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>前言</h2>
+
+<p>由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。</p>
+
+<p>首先，學生會在一個名為宅學習的平臺上撰寫作業，寫完後存檔會得到一個unique的URL，接著將這個URL貼到臉書課程社團的作業繳交貼文之留言處。
+然後助教在改作業時，就要點擊留言的網址，切換瀏覽器分頁，看完作業再關閉切換下一個。 所以改一份作業大概是三次點擊，假設修課人數有六十人… 大約就是180次的點擊🙄</p>
+
+<h2>正文</h2>
+
+<p>作業繳交貼文留言的格式如下
+<img src="https://s17.postimg.org/ssytvsxqn/2017-11-18_4.40.42.png" alt="" /></p>
+
+<p>讓我們開啟瀏覽器的開發人員工具來檢視</p>
+
+<p><img src="https://s17.postimg.org/y6xm35ku7/2017-11-18_4.41.23.png" alt="" /></p>
+
+<p>程式碼如下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;UFICommentBody&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;&quot;</span> <span class="na">dir=</span><span class="s">&quot;ltr&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span>
+</span><span class='line'>   <span class="na">href=</span><span class="s">&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fsls.weco.net%2Fnode%2F28539&amp;amp;h=ATOzewHOmxTiqORjcKQalUU4Q5Xc4M09fgfLDk7-4-Sf9BvMfqBoHTYK26mHWWKEyjnB8rhkhbF4kMWcAY64HgbYfbv_r5wggX01rVFusbyQ3zTEkl9QBauQ7zYEErTPtwSeRZZDtZf7x3E51A&quot;</span><span class="na">rel=</span><span class="s">&quot;nofollow&quot;</span>
+</span><span class='line'>  <span class="nt">&gt;</span>
+</span><span class='line'>   https://sls.weco.net/node/28539
+</span><span class='line'>  <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我們關注的會是這串連結</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>https://sls.weco.net/node/28539
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而我們先將作業繳交貼文留言的程式碼複製貼上到 <code>data.html</code>的檔案裡，再寫一隻爬蟲<code>parse.py</code>去爬我們要的資訊</p>
+
+<!--more-->
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c"># -*- coding: utf-8 -*-</span>
+</span><span class='line'><span class="c"># parse.py</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># function import BeautifulSoup</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># genetic import codecs</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">codecs</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 讀檔</span>
+</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;data.html&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>透過 <code>soup.select('span[class=UFICommentBody] a')</code>會回傳所有class 為 <code>UFICommentBody</code>之 <code>&lt;span&gt;</code>下的 <code>&lt;a&gt;</code>。由於結果不只一筆，所以回傳的是一個陣列。透過<code>for</code>去走訪它，而我們需要的只有 <code>&lt;a&gt;</code> tag 裡的文字，因此用 <code>.get_text()</code> 去取得文字。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">&#39;span[class=UFICommentBody] a&#39;</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">child</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">,&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>輸出結果</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">output</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&quot;https://sls.weco.net/node/28888&quot;</span><span class="p">,</span><span class="s">&quot;https://sls.weco.net/node/28889&quot;</span><span class="p">,</span><span class="s">&quot;https://sls.weco.net/node/28890&quot;</span><span class="p">,</span><span class="s">&quot;https://sls.weco.net/node/28874&quot;</span><span class="o">......</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>拿到這些連結後，我們只要再透過iFrame就能將所有的作業連結都呈現在同一頁了。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='HTML'><span class='line'>// index.html
+</span><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;title&gt;</span>SLS Prettify<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">language=</span><span class="s">&quot;javascript&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;scripts.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// script.js</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://sls.weco.net/node/28888&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28889&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28890&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28874&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28891&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28892&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28894&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28900&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28901&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28902&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28905&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28906&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28903&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28907&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28908&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28909&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28910&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28911&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28912&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28913&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28914&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28915&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28916&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28917&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28918&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28919&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28921&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28893&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28922&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28923&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28924&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28926&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28925&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28928&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28920&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28929&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28930&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28927&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28933&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28934&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28931&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28935&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28936&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28937&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28939&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28938&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28940&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28941&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28942&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28944&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28943&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28945&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28946&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28947&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28948&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28949&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28950&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28951&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28952&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28953&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28954&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28955&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28956&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28958&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28959&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28960&quot;</span><span class="p">,</span><span class="s2">&quot;https://sls.weco.net/node/28961&quot;</span><span class="p">,];</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">){</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">Frame</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;Iframe&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">Frame</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class='line'>    <span class="nx">Frame</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">&quot;90%&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">Frame</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s2">&quot;500px&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">Frame</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">i</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://hsiangyu.com/SLS_Prettify/">範例網頁</a></p>
+
+<p>目前流程為：</p>
+
+<p>把複製程式碼貼到<code>data.html</code> => 執行<code>parse.py</code>=>將輸出結果貼到<code>script.js</code>=>打開網頁<code>index.html</code></p>
+
+<p>但這樣的流程還是有點繁瑣，不過自動化，所以我寫了一個shell script來自動化（執行<code>parse.py</code>=>將輸出結果貼到<code>script.js</code>=>打開網頁<code>index.html</code>）這部分的流程。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#run.sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#將parse.py 的執行結果輸出到 output.txt中</span>
+</span><span class='line'>python3 parse.py &gt; output.txt
+</span><span class='line'><span class="c">#把第二行刪掉</span>
+</span><span class='line'>sed -i <span class="s1">&#39;&#39;</span> <span class="s1">&#39;2d&#39;</span> scripts.js
+</span><span class='line'><span class="c">#在第一行的後面 加入 output.txt 的內容</span>
+</span><span class='line'>sed -i <span class="s1">&#39;&#39;</span> <span class="s1">&#39;1 r output.txt&#39;</span> scripts.js
+</span><span class='line'><span class="c">#開啟瀏覽器</span>
+</span><span class='line'>open index.html
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>簡化後的流程：</p>
+
+<p>把複製程式碼貼到<code>data.html</code> => 執行<code>run.sh</code></p>
+
+<p>簡化超多的xDDDD</p>
+
+<h2>心得</h2>
+
+<p>透過這次的寫工具讓我再次體會到<code>偷懶使人進步</code>xDDD，剛好透過這次的機會學會了一點shell script，也體會到自動化的強大，將繁瑣的事情交給電腦吧!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hsiangyu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-08T11:04:39+08:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python/'>python</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hsiangyu.com/blog/2017/11/08/sls-prettify/" data-via="" data-counturl="http://hsiangyu.com/blog/2017/11/08/sls-prettify/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/09/26/git-flow/" title="Previous Post: git-flow">&laquo; git-flow</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section id="titles">
+  <a href="http://hsiangyu.com" title="Hsiangyu's Blog"><img id="logo" src="http://hsiangyu.com/images/portrait.png" /></a>
+  <h1 id="site_title"><a href="http://hsiangyu.com" title="Hsiangyu's Blog">Hsiangyu's Blog</a></h1>
+  <h3 id="site_subtitle">程式開發日常</h3>
+</section>
+
+<section id="menu">
+  <ul>
+    <li><i class="fa fa-home fa-lg"></i><a href="http://hsiangyu.com"> Home </a></li>
+    <li><i class="fa fa-calendar fa-lg"></i><a href="http://hsiangyu.com/blog/archives/"> Archives </a></li>
+    <li><i class="fa fa-user fa-lg"></i><a href="http://hsiangyu.com/about/"> About </a></li>
+    <li><i class="fa fa-rss fa-lg"></i><a href="http://hsiangyu.com/atom.xml"> Feed </a></li>
+  </ul>
+</section>
+
+<section id="social">
+  
+
+  
+
+  
+
+  
+    <a href="https://github.com/KevinHu2014" title="KevinHu2014"><i class="fa fa-github fa-2x"></i></a>
+  
+
+  
+
+  
+</section>
+
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/11/08/sls-prettify/">宅學習批改器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/09/26/git-flow/">git-flow</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/09/04/react-native-permissionsandroid/">PermissionsAndroid 坑</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/05/17/facebook-developer-circle/">Facebook Developer Circle Taipei</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/03/25/moed19ct/">萌典松初體驗</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/KevinHu2014">@KevinHu2014</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'KevinHu2014',
+            count: 6,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Hsiangyu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsiangyu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://hsiangyu.com/blog/2017/11/08/sls-prettify/';
+        var disqus_url = 'http://hsiangyu.com/blog/2017/11/08/sls-prettify/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

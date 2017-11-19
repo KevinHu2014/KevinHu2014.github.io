@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: python | Hsiangyu's Blog]]></title>
+  <link href="http://hsiangyu.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://hsiangyu.com/"/>
+  <updated>2017-11-19T22:30:00+08:00</updated>
+  <id>http://hsiangyu.com/</id>
+  <author>
+    <name><![CDATA[Hsiangyu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[宅學習批改器]]></title>
+    <link href="http://hsiangyu.com/blog/2017/11/08/sls-prettify/"/>
+    <updated>2017-11-08T11:04:39+08:00</updated>
+    <id>http://hsiangyu.com/blog/2017/11/08/sls-prettify</id>
+    <content type="html"><![CDATA[<h2>前言</h2>
+
+<p>由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。</p>
+
+<p>首先，學生會在一個名為宅學習的平臺上撰寫作業，寫完後存檔會得到一個unique的URL，接著將這個URL貼到臉書課程社團的作業繳交貼文之留言處。
+然後助教在改作業時，就要點擊留言的網址，切換瀏覽器分頁，看完作業再關閉切換下一個。 所以改一份作業大概是三次點擊，假設修課人數有六十人… 大約就是180次的點擊🙄</p>
+
+<h2>正文</h2>
+
+<p>作業繳交貼文留言的格式如下
+<img src="https://s17.postimg.org/ssytvsxqn/2017-11-18_4.40.42.png" alt="" /></p>
+
+<p>讓我們開啟瀏覽器的開發人員工具來檢視</p>
+
+<p><img src="https://s17.postimg.org/y6xm35ku7/2017-11-18_4.41.23.png" alt="" /></p>
+
+<p>程式碼如下
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;UFICommentBody&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>a class=<span class="ni">&amp;ldquo;&amp;rdquo;</span> dir=<span class="ni">&amp;ldquo;</span>ltr<span class="ni">&amp;rdquo;</span> target=<span class="ni">&amp;ldquo;</span>_blank<span class="ni">&amp;rdquo;</span>
+</span><span class='line'>   href=<span class="ni">&amp;ldquo;</span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fsls.weco.net%2Fnode%2F28539&amp;amp;amp;h=ATOzewHOmxTiqORjcKQalUU4Q5Xc4M09fgfLDk7-4-Sf9BvMfqBoHTYK26mHWWKEyjnB8rhkhbF4kMWcAY64HgbYfbv_r5wggX01rVFusbyQ3zTEkl9QBauQ7zYEErTPtwSeRZZDtZf7x3E51A&quot;</span><span class="nt">&gt;</span>https://l.facebook.com/l.php?u=https%3A%2F%2Fsls.weco.net%2Fnode%2F28539<span class="ni">&amp;amp;</span>amp;h=ATOzewHOmxTiqORjcKQalUU4Q5Xc4M09fgfLDk7-4-Sf9BvMfqBoHTYK26mHWWKEyjnB8rhkhbF4kMWcAY64HgbYfbv_r5wggX01rVFusbyQ3zTEkl9QBauQ7zYEErTPtwSeRZZDtZf7x3E51A<span class="nt">&lt;/a&gt;</span>&quot;rel=&quot;nofollow<span class="ni">&amp;rdquo;</span><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;blockquote&gt;&lt;p&gt;</span>   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://sls.weco.net/node/28539&quot;</span><span class="nt">&gt;</span>https://sls.weco.net/node/28539<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+<p>我們關注的會是這串連結</p>
+
+<pre><code>https://sls.weco.net/node/28539
+</code></pre>
+
+<p>而我們先將作業繳交貼文留言的程式碼複製貼上到 <code>data.html</code>的檔案裡，再寫一隻爬蟲<code>parse.py</code>去爬我們要的資訊</p>
+
+<!--more-->
+
+
+<pre><code class="python"># -*- coding: utf-8 -*-
+# parse.py
+
+# function import BeautifulSoup
+from bs4 import BeautifulSoup
+
+# genetic import codecs
+import codecs
+
+# 讀檔
+f = codecs.open("data.html", 'r', 'utf-8')
+</code></pre>
+
+<p>透過 <code>soup.select('span[class=UFICommentBody] a')</code>會回傳所有class 為 <code>UFICommentBody</code>之 <code>&lt;span&gt;</code>下的 <code>&lt;a&gt;</code>。由於結果不只一筆，所以回傳的是一個陣列。透過<code>for</code>去走訪它，而我們需要的只有 <code>&lt;a&gt;</code> tag 裡的文字，因此用 <code>.get_text()</code> 去取得文字。</p>
+
+<pre><code class="python">
+s = ""
+
+for child in soup.select('span[class=UFICommentBody] a'):
+    s = s + "\"" + child.get_text() + "\","
+
+print(s)
+</code></pre>
+
+<p>輸出結果</p>
+
+<pre><code>output
+
+"https://sls.weco.net/node/28888","https://sls.weco.net/node/28889","https://sls.weco.net/node/28890","https://sls.weco.net/node/28874"......
+</code></pre>
+
+<p>拿到這些連結後，我們只要再透過iFrame就能將所有的作業連結都呈現在同一頁了。</p>
+
+<pre><code class="HTML">// index.html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width"&gt;
+  &lt;title&gt;SLS Prettify&lt;/title&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;script language="javascript" type="text/javascript" src="scripts.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<pre><code class="javascript">// script.js
+var i = 0;
+var arr = ["https://sls.weco.net/node/28888","https://sls.weco.net/node/28889","https://sls.weco.net/node/28890","https://sls.weco.net/node/28874","https://sls.weco.net/node/28891","https://sls.weco.net/node/28892","https://sls.weco.net/node/28894","https://sls.weco.net/node/28900","https://sls.weco.net/node/28901","https://sls.weco.net/node/28902","https://sls.weco.net/node/28905","https://sls.weco.net/node/28906","https://sls.weco.net/node/28903","https://sls.weco.net/node/28907","https://sls.weco.net/node/28908","https://sls.weco.net/node/28909","https://sls.weco.net/node/28910","https://sls.weco.net/node/28911","https://sls.weco.net/node/28912","https://sls.weco.net/node/28913","https://sls.weco.net/node/28914","https://sls.weco.net/node/28915","https://sls.weco.net/node/28916","https://sls.weco.net/node/28917","https://sls.weco.net/node/28918","https://sls.weco.net/node/28919","https://sls.weco.net/node/28921","https://sls.weco.net/node/28893","https://sls.weco.net/node/28922","https://sls.weco.net/node/28923","https://sls.weco.net/node/28924","https://sls.weco.net/node/28926","https://sls.weco.net/node/28925","https://sls.weco.net/node/28928","https://sls.weco.net/node/28920","https://sls.weco.net/node/28929","https://sls.weco.net/node/28930","https://sls.weco.net/node/28927","https://sls.weco.net/node/28933","https://sls.weco.net/node/28934","https://sls.weco.net/node/28931","https://sls.weco.net/node/28935","https://sls.weco.net/node/28936","https://sls.weco.net/node/28937","https://sls.weco.net/node/28939","https://sls.weco.net/node/28938","https://sls.weco.net/node/28940","https://sls.weco.net/node/28941","https://sls.weco.net/node/28942","https://sls.weco.net/node/28944","https://sls.weco.net/node/28943","https://sls.weco.net/node/28945","https://sls.weco.net/node/28946","https://sls.weco.net/node/28947","https://sls.weco.net/node/28948","https://sls.weco.net/node/28949","https://sls.weco.net/node/28950","https://sls.weco.net/node/28951","https://sls.weco.net/node/28952","https://sls.weco.net/node/28953","https://sls.weco.net/node/28954","https://sls.weco.net/node/28955","https://sls.weco.net/node/28956","https://sls.weco.net/node/28958","https://sls.weco.net/node/28959","https://sls.weco.net/node/28960","https://sls.weco.net/node/28961",];
+while(i&lt;arr.length){
+    var Frame = document.createElement("Iframe");
+    Frame.src = arr[i];
+    Frame.width = "90%";
+    Frame.height = "500px";
+    document.body.appendChild(Frame);
+    i=i+1;
+    }
+</code></pre>
+
+<p><a href="http://hsiangyu.com/SLS_Prettify/">範例網頁</a></p>
+
+<p>目前流程為：</p>
+
+<p>把複製程式碼貼到<code>data.html</code> => 執行<code>parse.py</code>=>將輸出結果貼到<code>script.js</code>=>打開網頁<code>index.html</code></p>
+
+<p>但這樣的流程還是有點繁瑣，不過自動化，所以我寫了一個shell script來自動化（執行<code>parse.py</code>=>將輸出結果貼到<code>script.js</code>=>打開網頁<code>index.html</code>）這部分的流程。</p>
+
+<pre><code class="bash">#run.sh
+
+#!/bin/bash
+
+#將parse.py 的執行結果輸出到 output.txt中
+python3 parse.py &gt; output.txt
+#把第二行刪掉
+sed -i '' '2d' scripts.js
+#在第一行的後面 加入 output.txt 的內容
+sed -i '' '1 r output.txt' scripts.js
+#開啟瀏覽器
+open index.html
+</code></pre>
+
+<p>簡化後的流程：</p>
+
+<p>把複製程式碼貼到<code>data.html</code> => 執行<code>run.sh</code></p>
+
+<p>簡化超多的xDDDD</p>
+
+<h2>心得</h2>
+
+<p>透過這次的寫工具讓我再次體會到<code>偷懶使人進步</code>xDDD，剛好透過這次的機會學會了一點shell script，也體會到自動化的強大，將繁瑣的事情交給電腦吧!</p>
+]]></content>
+  </entry>
+  
+</feed>

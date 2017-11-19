@@ -9,7 +9,8 @@
   <meta name="author" content="Hsiangyu">
 
   
-  <meta name="description" content="Git flow 筆記 前言 在公司開發專案的時候，同事剛好需要開發一個新的feature，而這個feature需要必較久的時間才能回到master，此時我們重新檢視了原來使用的開發流Github Flow 是不是有什麼缺點，並且也討論到如果轉到Git flow是否能解決現況下遇到的問題。 簡介 &hellip;">
+  <meta name="description" content="前言 由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。 首先，學生會在一個名為宅學習的平臺上撰寫作業，寫完後存檔會得到一個unique的URL，接著將這個URL貼到臉書課程社團的作業繳交貼文之留言處。
+然後助教在改作業時，就要點擊留言的網址，切換瀏覽器分頁， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +96,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/11/08/sls-prettify/">宅學習批改器</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-08T11:04:39+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>前言</h2>
+
+<p>由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。</p>
+
+<p>首先，學生會在一個名為宅學習的平臺上撰寫作業，寫完後存檔會得到一個unique的URL，接著將這個URL貼到臉書課程社團的作業繳交貼文之留言處。
+然後助教在改作業時，就要點擊留言的網址，切換瀏覽器分頁，看完作業再關閉切換下一個。 所以改一份作業大概是三次點擊，假設修課人數有六十人… 大約就是180次的點擊🙄</p>
+
+<h2>正文</h2>
+
+<p>作業繳交貼文留言的格式如下
+<img src="https://s17.postimg.org/ssytvsxqn/2017-11-18_4.40.42.png" alt="" /></p>
+
+<p>讓我們開啟瀏覽器的開發人員工具來檢視</p>
+
+<p><img src="https://s17.postimg.org/y6xm35ku7/2017-11-18_4.41.23.png" alt="" /></p>
+
+<p>程式碼如下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;UFICommentBody&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;&quot;</span> <span class="na">dir=</span><span class="s">&quot;ltr&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span>
+</span><span class='line'>   <span class="na">href=</span><span class="s">&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fsls.weco.net%2Fnode%2F28539&amp;amp;h=ATOzewHOmxTiqORjcKQalUU4Q5Xc4M09fgfLDk7-4-Sf9BvMfqBoHTYK26mHWWKEyjnB8rhkhbF4kMWcAY64HgbYfbv_r5wggX01rVFusbyQ3zTEkl9QBauQ7zYEErTPtwSeRZZDtZf7x3E51A&quot;</span><span class="na">rel=</span><span class="s">&quot;nofollow&quot;</span>
+</span><span class='line'>  <span class="nt">&gt;</span>
+</span><span class='line'>   https://sls.weco.net/node/28539
+</span><span class='line'>  <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我們關注的會是這串連結</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>https://sls.weco.net/node/28539
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而我們先將作業繳交貼文留言的程式碼複製貼上到 <code>data.html</code>的檔案裡，再寫一隻爬蟲<code>parse.py</code>去爬我們要的資訊</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/11/08/sls-prettify/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -505,6 +589,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/08/sls-prettify/">宅學習批改器</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/09/26/git-flow/">git-flow</a>
       </li>
     
@@ -518,10 +606,6 @@
     
       <li class="post">
         <a href="/blog/2017/03/25/moed19ct/">萌典松初體驗</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/19/iching-chatbot/">易經數字占卜Chatbot</a>
       </li>
     
   </ul>
