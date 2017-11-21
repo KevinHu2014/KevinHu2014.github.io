@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-11-19T22:30:00+08:00</updated>
+  <updated>2017-11-22T00:05:52+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -28,11 +28,11 @@
 <h2>正文</h2>
 
 <p>作業繳交貼文留言的格式如下
-<img src="https://s17.postimg.org/ssytvsxqn/2017-11-18_4.40.42.png" alt="" /></p>
+<img src="https://s8.postimg.org/l7cervb39/2017-11-21_11.57.01.png" alt="" /></p>
 
 <p>讓我們開啟瀏覽器的開發人員工具來檢視</p>
 
-<p><img src="https://s17.postimg.org/y6xm35ku7/2017-11-18_4.41.23.png" alt="" /></p>
+<p><img src="https://s8.postimg.org/9jicwuodx/2017-11-22_12.00.10.png" alt="" /></p>
 
 <p>程式碼如下
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
