@@ -16,11 +16,11 @@ categories: python
 ## 正文
 
 作業繳交貼文留言的格式如下
-![](https://s17.postimg.org/ssytvsxqn/2017-11-18_4.40.42.png)
+![](https://s8.postimg.org/l7cervb39/2017-11-21_11.57.01.png)
 
 讓我們開啟瀏覽器的開發人員工具來檢視
 
-![](https://s17.postimg.org/y6xm35ku7/2017-11-18_4.41.23.png)
+![](https://s8.postimg.org/9jicwuodx/2017-11-22_12.00.10.png)
 
 
 程式碼如下
