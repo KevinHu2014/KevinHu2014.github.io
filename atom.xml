@@ -4,7 +4,7 @@
   <title><![CDATA[Hsiangyu's Blog]]></title>
   <link href="http://hsiangyu.com/atom.xml" rel="self"/>
   <link href="http://hsiangyu.com/"/>
-  <updated>2017-11-22T00:05:52+08:00</updated>
+  <updated>2018-01-06T00:50:33+08:00</updated>
   <id>http://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ViroReact AR 初體驗]]></title>
+    <link href="http://hsiangyu.com/blog/2018/01/05/ar/"/>
+    <updated>2018-01-05T22:46:31+08:00</updated>
+    <id>http://hsiangyu.com/blog/2018/01/05/ar</id>
+    <content type="html"><![CDATA[<h2>前言</h2>
+
+<p>最近剛好拿到實驗室新採購的手機，一隻是ASUS 出的Zenfone AR，另一隻是Apple 出的iPhone X。前陣子在React Native Community的社群有survey到viromedia 這家公司做的AR套件，就花了時間研究了一下。</p>
+
+<h2>正文</h2>
+
+<p>會想要玩AR，是因為之前看到Snapchat&rsquo;s 新的AR 功能</p>
+
+<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmashableclickclickclick%2Fvideos%2F10155694012049705%2F&show_text=0&width=476" width="476" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+
+
+<p>想為公司的專案也加入AR的功能。由於公司的專案是用React Native來開發的，剛好viromedia有推出ViroReact，透過ViroReact可以去呼叫 iOS的 ARkit或是 Android的 ArCore，並透過同一份程式碼的特性來快速在雙平台上開發AR的應用。</p>
+
+<p>接下來就快速帶一下安裝教學</p>
+
+<p>所需設備</p>
+
+<p>AR (iOS)</p>
+
+<ol>
+<li><p>iOS 裝置至少要是 A9 chip 而且 運行 iOS 11</p></li>
+<li><p>OSX 的電腦</p></li>
+</ol>
+
+
+<p>AR (Android)</p>
+
+<ol>
+<li>支援ARCore 的手機</li>
+</ol>
+
+
+<!--more-->
+
+
+<p>首先要確保你的電腦是有React Native的環境</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g react-native-cli</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再來是安裝 VIROREACT COMMAND LINE INTERFACE</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g react-viro-cli</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接下來是初始一個 VIROREACT的專案</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>react-viro init ViroSample --verbose</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後要去下App 商店下載程式</p>
+
+<p>iOS</p>
+
+<p><a href="https://itunes.apple.com/us/app/viro-media/id1163100576?mt=8">Viro Media App</a></p>
+
+<p>Android</p>
+
+<p><a href="https://play.google.com/store/apps/details?id=com.viromedia.viromedia">Viro Media App</a></p>
+
+<p>接著打開剛剛初始化的專案，找到<code>App.js</code>，將<code>API_KEY_HERE</code>置換成你的API Key。如果還沒有API的話，請去網站<a href="https://viromedia.com/signup">註冊</a>，註冊完後他會以Email的形式將API key寄給你。</p>
+
+<p>再來是在terminal 啟動 package server</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這邊要注意的是，不用去執行<code>react-native run-android</code>或<code>react-native run-ios</code>也不用去Xcode那邊開啟專案。
+因為很重要，所以要特別提醒xD，跟以往的套件使用流程非常不一樣。</p>
+
+<p>最後就要來測試我們的<code>TESTBED APP</code>了</p>
+
+<ol>
+<li>在你的 iOS或是 Andoroid裝置上開啟 Viro Media App</li>
+<li>點擊左側的 Menu，然後點擊"Enter Testbed"</li>
+<li>找到你的ngrok url <code>https://xxxxxx.ngrok.io</code>，他會顯示在你的npm start 的那個terminal 頁面，輸入後就按GO</li>
+<li>會有兩個按鈕可以選，一個是 AR，另一個是 VR。這裡就選擇AR</li>
+</ol>
+
+
+<p>以上是參考官網 <a href="https://docs.viromedia.com/docs/quick-start">Quick Start</a>的翻譯和加入一些自己覺得該注意的地方</p>
+
+<p>Hello World 的畫面大概如下</p>
+
+<p><img src="https://s10.postimg.org/b6o1a3yu1/IMG_0004.png" alt="" /></p>
+
+<p>如果有興趣繼續研究的話可以參考<a href="https://docs.viromedia.com/v2.2.0/docs/tutorial-ar">連結</a>，走完後的final大概如下圖</p>
+
+<p><img src="https://s10.postimg.org/7aape1ljd/IMG_0005.png" alt="" /></p>
+
+<p><img src="https://s10.postimg.org/gsf1rt9g9/IMG_0006.png" alt="" /></p>
+
+<h2>後記</h2>
+
+<p>實驗室的Zenfone AR 並不支援，目前支援ARCore的手機其實相當稀少（Pixel, Pixel XL, Pixel 2, Pixel 2 XL, and Samsung S8.），在未來應該會慢慢支援更多的 Android手機。
+針對目前這個問題，Github上有開發者是透過修改Android Library來繞過 ARCore device check（<a href="https://github.com/tomthecarrot/arcore-for-all">連結</a>），不過我目前試了我手邊的手機都沒有成功，可能真的就要再等等吧！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[宅學習批改器]]></title>
