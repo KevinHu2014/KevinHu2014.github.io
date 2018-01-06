@@ -4,7 +4,8 @@
 markdown: kramdown
 mathjax: true
 
-url: http://hsiangyu.com
+url: https://hsiangyu.com   # with the https protocol
+enforce_ssl: hsiangyu.com   # without any protocol
 title: Hsiangyu's Blog
 subtitle: 程式開發日常
 author: Hsiangyu
