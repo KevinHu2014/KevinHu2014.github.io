@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: meetup | Hsiangyu's Blog]]></title>
-  <link href="http://hsiangyu.com/blog/categories/meetup/atom.xml" rel="self"/>
-  <link href="http://hsiangyu.com/"/>
-  <updated>2018-01-06T00:50:33+08:00</updated>
-  <id>http://hsiangyu.com/</id>
+  <link href="https://hsiangyu.com/blog/categories/meetup/atom.xml" rel="self"/>
+  <link href="https://hsiangyu.com/"/>
+  <updated>2018-01-06T21:13:30+08:00</updated>
+  <id>https://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook Developer Circle Taipei]]></title>
-    <link href="http://hsiangyu.com/blog/2017/05/17/facebook-developer-circle/"/>
+    <link href="https://hsiangyu.com/blog/2017/05/17/facebook-developer-circle/"/>
     <updated>2017-05-17T23:50:47+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/05/17/facebook-developer-circle</id>
+    <id>https://hsiangyu.com/blog/2017/05/17/facebook-developer-circle</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>由於本公司的產品大量使用到Facebook的服務，所以就翹課來參加了首次在台灣舉辦的<strong>Facebook Developer Circle : Taipei</strong> 的開發者聚會，這次的活動是舉辦在CHOCOLABS 的辦公室。</p>

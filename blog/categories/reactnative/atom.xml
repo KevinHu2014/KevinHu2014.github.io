@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: reactnative | Hsiangyu's Blog]]></title>
-  <link href="http://hsiangyu.com/blog/categories/reactnative/atom.xml" rel="self"/>
-  <link href="http://hsiangyu.com/"/>
-  <updated>2018-01-06T00:50:33+08:00</updated>
-  <id>http://hsiangyu.com/</id>
+  <link href="https://hsiangyu.com/blog/categories/reactnative/atom.xml" rel="self"/>
+  <link href="https://hsiangyu.com/"/>
+  <updated>2018-01-06T21:13:30+08:00</updated>
+  <id>https://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ViroReact AR 初體驗]]></title>
-    <link href="http://hsiangyu.com/blog/2018/01/05/ar/"/>
+    <link href="https://hsiangyu.com/blog/2018/01/05/ar/"/>
     <updated>2018-01-05T22:46:31+08:00</updated>
-    <id>http://hsiangyu.com/blog/2018/01/05/ar</id>
+    <id>https://hsiangyu.com/blog/2018/01/05/ar</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>最近剛好拿到實驗室新採購的手機，一隻是ASUS 出的Zenfone AR，另一隻是Apple 出的iPhone X。前陣子在React Native Community的社群有survey到viromedia 這家公司做的AR套件，就花了時間研究了一下。</p>
@@ -116,9 +116,9 @@ npm start
   
   <entry>
     <title type="html"><![CDATA[PermissionsAndroid 坑]]></title>
-    <link href="http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/"/>
+    <link href="https://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/"/>
     <updated>2017-09-04T17:50:59+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid</id>
+    <id>https://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid</id>
     <content type="html"><![CDATA[<h1>Andoird 6.0 PermissionsAndroid 坑</h1>
 
 <h2>前言</h2>

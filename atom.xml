@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Hsiangyu's Blog]]></title>
-  <link href="http://hsiangyu.com/atom.xml" rel="self"/>
-  <link href="http://hsiangyu.com/"/>
-  <updated>2018-01-06T00:50:33+08:00</updated>
-  <id>http://hsiangyu.com/</id>
+  <link href="https://hsiangyu.com/atom.xml" rel="self"/>
+  <link href="https://hsiangyu.com/"/>
+  <updated>2018-01-06T21:13:30+08:00</updated>
+  <id>https://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ViroReact AR 初體驗]]></title>
-    <link href="http://hsiangyu.com/blog/2018/01/05/ar/"/>
+    <link href="https://hsiangyu.com/blog/2018/01/05/ar/"/>
     <updated>2018-01-05T22:46:31+08:00</updated>
-    <id>http://hsiangyu.com/blog/2018/01/05/ar</id>
+    <id>https://hsiangyu.com/blog/2018/01/05/ar</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>最近剛好拿到實驗室新採購的手機，一隻是ASUS 出的Zenfone AR，另一隻是Apple 出的iPhone X。前陣子在React Native Community的社群有survey到viromedia 這家公司做的AR套件，就花了時間研究了一下。</p>
@@ -123,9 +123,9 @@
   
   <entry>
     <title type="html"><![CDATA[宅學習批改器]]></title>
-    <link href="http://hsiangyu.com/blog/2017/11/08/sls-prettify/"/>
+    <link href="https://hsiangyu.com/blog/2017/11/08/sls-prettify/"/>
     <updated>2017-11-08T11:04:39+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/11/08/sls-prettify</id>
+    <id>https://hsiangyu.com/blog/2017/11/08/sls-prettify</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。</p>
@@ -333,9 +333,9 @@
   
   <entry>
     <title type="html"><![CDATA[git-flow]]></title>
-    <link href="http://hsiangyu.com/blog/2017/09/26/git-flow/"/>
+    <link href="https://hsiangyu.com/blog/2017/09/26/git-flow/"/>
     <updated>2017-09-26T14:40:20+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/09/26/git-flow</id>
+    <id>https://hsiangyu.com/blog/2017/09/26/git-flow</id>
     <content type="html"><![CDATA[<h1>Git flow 筆記</h1>
 
 <h2>前言</h2>
@@ -516,9 +516,9 @@
   
   <entry>
     <title type="html"><![CDATA[PermissionsAndroid 坑]]></title>
-    <link href="http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/"/>
+    <link href="https://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid/"/>
     <updated>2017-09-04T17:50:59+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid</id>
+    <id>https://hsiangyu.com/blog/2017/09/04/react-native-permissionsandroid</id>
     <content type="html"><![CDATA[<h1>Andoird 6.0 PermissionsAndroid 坑</h1>
 
 <h2>前言</h2>
@@ -801,9 +801,9 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook Developer Circle Taipei]]></title>
-    <link href="http://hsiangyu.com/blog/2017/05/17/facebook-developer-circle/"/>
+    <link href="https://hsiangyu.com/blog/2017/05/17/facebook-developer-circle/"/>
     <updated>2017-05-17T23:50:47+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/05/17/facebook-developer-circle</id>
+    <id>https://hsiangyu.com/blog/2017/05/17/facebook-developer-circle</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>由於本公司的產品大量使用到Facebook的服務，所以就翹課來參加了首次在台灣舉辦的<strong>Facebook Developer Circle : Taipei</strong> 的開發者聚會，這次的活動是舉辦在CHOCOLABS 的辦公室。</p>
@@ -906,9 +906,9 @@
   
   <entry>
     <title type="html"><![CDATA[萌典松初體驗]]></title>
-    <link href="http://hsiangyu.com/blog/2017/03/25/moed19ct/"/>
+    <link href="https://hsiangyu.com/blog/2017/03/25/moed19ct/"/>
     <updated>2017-03-25T22:56:08+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/03/25/moed19ct</id>
+    <id>https://hsiangyu.com/blog/2017/03/25/moed19ct</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>由於三月份g0v的大松沒有搶到票QQ，所以想說來參加看看萌典松。</p>
@@ -974,9 +974,9 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
   
   <entry>
     <title type="html"><![CDATA[易經數字占卜Chatbot]]></title>
-    <link href="http://hsiangyu.com/blog/2017/03/19/iching-chatbot/"/>
+    <link href="https://hsiangyu.com/blog/2017/03/19/iching-chatbot/"/>
     <updated>2017-03-19T23:53:54+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/03/19/iching-chatbot</id>
+    <id>https://hsiangyu.com/blog/2017/03/19/iching-chatbot</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>根據Simon Sinek的<a href="http://tedxtaipei.com/articles/simon_sinek_how_great_leaders_inspire_action-2/"><strong>黃金圈</strong></a>理論，從裡到外分為三個階層，
@@ -1186,9 +1186,9 @@ A3的資料量其實非常大，一年下來大約有十幾萬筆，要在短時
   
   <entry>
     <title type="html"><![CDATA[Nisra Hackathon 2017]]></title>
-    <link href="http://hsiangyu.com/blog/2017/02/23/nisra-hackathon-2017/"/>
+    <link href="https://hsiangyu.com/blog/2017/02/23/nisra-hackathon-2017/"/>
     <updated>2017-02-23T11:44:02+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/02/23/nisra-hackathon-2017</id>
+    <id>https://hsiangyu.com/blog/2017/02/23/nisra-hackathon-2017</id>
     <content type="html"><![CDATA[<h1>Nisra Hackathon 2017 心得</h1>
 
 <h3>前言</h3>

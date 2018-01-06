@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: chatbot | Hsiangyu's Blog]]></title>
-  <link href="http://hsiangyu.com/blog/categories/chatbot/atom.xml" rel="self"/>
-  <link href="http://hsiangyu.com/"/>
-  <updated>2018-01-06T00:50:33+08:00</updated>
-  <id>http://hsiangyu.com/</id>
+  <link href="https://hsiangyu.com/blog/categories/chatbot/atom.xml" rel="self"/>
+  <link href="https://hsiangyu.com/"/>
+  <updated>2018-01-06T21:13:30+08:00</updated>
+  <id>https://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[易經數字占卜Chatbot]]></title>
-    <link href="http://hsiangyu.com/blog/2017/03/19/iching-chatbot/"/>
+    <link href="https://hsiangyu.com/blog/2017/03/19/iching-chatbot/"/>
     <updated>2017-03-19T23:53:54+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/03/19/iching-chatbot</id>
+    <id>https://hsiangyu.com/blog/2017/03/19/iching-chatbot</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>根據Simon Sinek的<a href="http://tedxtaipei.com/articles/simon_sinek_how_great_leaders_inspire_action-2/"><strong>黃金圈</strong></a>理論，從裡到外分為三個階層，

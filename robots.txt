@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://hsiangyu.com/sitemap.xml 
+Sitemap: https://hsiangyu.com/sitemap.xml 

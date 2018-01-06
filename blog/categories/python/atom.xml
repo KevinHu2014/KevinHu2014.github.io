@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: python | Hsiangyu's Blog]]></title>
-  <link href="http://hsiangyu.com/blog/categories/python/atom.xml" rel="self"/>
-  <link href="http://hsiangyu.com/"/>
-  <updated>2018-01-06T00:50:33+08:00</updated>
-  <id>http://hsiangyu.com/</id>
+  <link href="https://hsiangyu.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="https://hsiangyu.com/"/>
+  <updated>2018-01-06T21:13:30+08:00</updated>
+  <id>https://hsiangyu.com/</id>
   <author>
     <name><![CDATA[Hsiangyu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[宅學習批改器]]></title>
-    <link href="http://hsiangyu.com/blog/2017/11/08/sls-prettify/"/>
+    <link href="https://hsiangyu.com/blog/2017/11/08/sls-prettify/"/>
     <updated>2017-11-08T11:04:39+08:00</updated>
-    <id>http://hsiangyu.com/blog/2017/11/08/sls-prettify</id>
+    <id>https://hsiangyu.com/blog/2017/11/08/sls-prettify</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>由於當助教改作業的流程很繁瑣（我hen懶），所以就寫了一個工具幫助自己簡化流程。</p>
