@@ -42,4 +42,4 @@ Love making fun side projects
 
 Taipei (Taiwan)
 
-Email: kevin@weco.net
+Email: kevinhu@weco.net
